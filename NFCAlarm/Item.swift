@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  NFCAlarm
-//
-//  Created by Oleksandr Orlov on 26/8/25.
-//
-
 import Foundation
 import SwiftData
 

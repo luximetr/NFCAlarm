@@ -1,41 +1,32 @@
-//
-//  ContentView.swift
-//  NFCAlarm
-//
-//  Created by Oleksandr Orlov on 26/8/25.
-//
-
 import SwiftUI
 import SwiftData
 
+struct Alarm: Identifiable {
+    let id: UUID
+    let title: String?
+    let hours: Int
+    let minutes: Int
+}
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State var alarms: [Alarm]
+    @State private var isOn: Bool = false
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        List {
+            ForEach(alarms) { alarm in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(alarm.hours):\(alarm.minutes)")
+                        Text(alarm.title ?? "No title")
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    Spacer()
+                    Toggle("", isOn: $isOn)
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle())
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
 
@@ -49,13 +40,17 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+//                modelContext.delete(items[index])
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(alarms: [
+        .init(id: UUID(), title: "Alarm 1", hours: 00, minutes: 15),
+        .init(id: UUID(), title: "Alarm 2", hours: 00, minutes: 30),
+        .init(id: UUID(), title: "Alarm 3", hours: 00, minutes: 45)
+    ])
         .modelContainer(for: Item.self, inMemory: true)
 }

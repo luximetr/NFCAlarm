@@ -1,10 +1,3 @@
-//
-//  NFCAlarmApp.swift
-//  NFCAlarm
-//
-//  Created by Oleksandr Orlov on 26/8/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -25,8 +18,10 @@ struct NFCAlarmApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(alarms: [.init(id: UUID(), title: "Alarm 1", hours: 00, minutes: 15),
+                                 .init(id: UUID(), title: "Alarm 2", hours: 00, minutes: 30),
+                                 .init(id: UUID(), title: "Alarm 3", hours: 00, minutes: 45)])
         }
-        .modelContainer(sharedModelContainer)
+//        .modelContainer(sharedModelContainer)
     }
 }

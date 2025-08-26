@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		55B7873F2E5DF6AD0000C2ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B787252E5DF6AB0000C2ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B7872C2E5DF6AB0000C2ED;
+			remoteInfo = NFCAlarm;
+		};
+		55B787492E5DF6AD0000C2ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55B787252E5DF6AB0000C2ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55B7872C2E5DF6AB0000C2ED;
+			remoteInfo = NFCAlarm;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B7873E2E5DF6AD0000C2ED /* NFCAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		55B787502E5DF6AD0000C2ED /* Exceptions for "NFCAlarm" folder in "NFCAlarm" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 55B7872C2E5DF6AB0000C2ED /* NFCAlarm */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		55B7872F2E5DF6AB0000C2ED /* NFCAlarm */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				55B787502E5DF6AD0000C2ED /* Exceptions for "NFCAlarm" folder in "NFCAlarm" target */,
+			);
+			path = NFCAlarm;
+			sourceTree = "<group>";
+		};
+		55B787412E5DF6AD0000C2ED /* NFCAlarmTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = NFCAlarmTests;
+			sourceTree = "<group>";
+		};
+		55B7874B2E5DF6AD0000C2ED /* NFCAlarmUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = NFCAlarmUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55B7872A2E5DF6AB0000C2ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B7873B2E5DF6AD0000C2ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B787452E5DF6AD0000C2ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55B787242E5DF6AB0000C2ED = {
+			isa = PBXGroup;
+			children = (
+				55B7872F2E5DF6AB0000C2ED /* NFCAlarm */,
+				55B787412E5DF6AD0000C2ED /* NFCAlarmTests */,
+				55B7874B2E5DF6AD0000C2ED /* NFCAlarmUITests */,
+				55B7872E2E5DF6AB0000C2ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55B7872E2E5DF6AB0000C2ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */,
+				55B7873E2E5DF6AD0000C2ED /* NFCAlarmTests.xctest */,
+				55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55B7872C2E5DF6AB0000C2ED /* NFCAlarm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B787512E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarm" */;
+			buildPhases = (
+				55B787292E5DF6AB0000C2ED /* Sources */,
+				55B7872A2E5DF6AB0000C2ED /* Frameworks */,
+				55B7872B2E5DF6AB0000C2ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				55B7872F2E5DF6AB0000C2ED /* NFCAlarm */,
+			);
+			name = NFCAlarm;
+			packageProductDependencies = (
+			);
+			productName = NFCAlarm;
+			productReference = 55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */;
+			productType = "com.apple.product-type.application";
+		};
+		55B7873D2E5DF6AD0000C2ED /* NFCAlarmTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B787562E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarmTests" */;
+			buildPhases = (
+				55B7873A2E5DF6AD0000C2ED /* Sources */,
+				55B7873B2E5DF6AD0000C2ED /* Frameworks */,
+				55B7873C2E5DF6AD0000C2ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55B787402E5DF6AD0000C2ED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				55B787412E5DF6AD0000C2ED /* NFCAlarmTests */,
+			);
+			name = NFCAlarmTests;
+			packageProductDependencies = (
+			);
+			productName = NFCAlarmTests;
+			productReference = 55B7873E2E5DF6AD0000C2ED /* NFCAlarmTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		55B787472E5DF6AD0000C2ED /* NFCAlarmUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B787592E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarmUITests" */;
+			buildPhases = (
+				55B787442E5DF6AD0000C2ED /* Sources */,
+				55B787452E5DF6AD0000C2ED /* Frameworks */,
+				55B787462E5DF6AD0000C2ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55B7874A2E5DF6AD0000C2ED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				55B7874B2E5DF6AD0000C2ED /* NFCAlarmUITests */,
+			);
+			name = NFCAlarmUITests;
+			packageProductDependencies = (
+			);
+			productName = NFCAlarmUITests;
+			productReference = 55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55B787252E5DF6AB0000C2ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					55B7872C2E5DF6AB0000C2ED = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					55B7873D2E5DF6AD0000C2ED = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 55B7872C2E5DF6AB0000C2ED;
+					};
+					55B787472E5DF6AD0000C2ED = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 55B7872C2E5DF6AB0000C2ED;
+					};
+				};
+			};
+			buildConfigurationList = 55B787282E5DF6AB0000C2ED /* Build configuration list for PBXProject "NFCAlarm" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55B787242E5DF6AB0000C2ED;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 55B7872E2E5DF6AB0000C2ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55B7872C2E5DF6AB0000C2ED /* NFCAlarm */,
+				55B7873D2E5DF6AD0000C2ED /* NFCAlarmTests */,
+				55B787472E5DF6AD0000C2ED /* NFCAlarmUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55B7872B2E5DF6AB0000C2ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B7873C2E5DF6AD0000C2ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B787462E5DF6AD0000C2ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55B787292E5DF6AB0000C2ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B7873A2E5DF6AD0000C2ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55B787442E5DF6AD0000C2ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55B787402E5DF6AD0000C2ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B7872C2E5DF6AB0000C2ED /* NFCAlarm */;
+			targetProxy = 55B7873F2E5DF6AD0000C2ED /* PBXContainerItemProxy */;
+		};
+		55B7874A2E5DF6AD0000C2ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55B7872C2E5DF6AB0000C2ED /* NFCAlarm */;
+			targetProxy = 55B787492E5DF6AD0000C2ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		55B787522E5DF6AD0000C2ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NFCAlarm/NFCAlarm.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NFCAlarm/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.nfcalarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55B787532E5DF6AD0000C2ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NFCAlarm/NFCAlarm.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NFCAlarm/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.nfcalarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		55B787542E5DF6AD0000C2ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9HC298K985;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		55B787552E5DF6AD0000C2ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9HC298K985;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		55B787572E5DF6AD0000C2ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HC298K985;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.NFCAlarmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NFCAlarm.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NFCAlarm";
+			};
+			name = Debug;
+		};
+		55B787582E5DF6AD0000C2ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HC298K985;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.NFCAlarmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NFCAlarm.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NFCAlarm";
+			};
+			name = Release;
+		};
+		55B7875A2E5DF6AD0000C2ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HC298K985;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.NFCAlarmUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NFCAlarm;
+			};
+			name = Debug;
+		};
+		55B7875B2E5DF6AD0000C2ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HC298K985;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sync.luximetr.NFCAlarmUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NFCAlarm;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55B787282E5DF6AB0000C2ED /* Build configuration list for PBXProject "NFCAlarm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B787542E5DF6AD0000C2ED /* Debug */,
+				55B787552E5DF6AD0000C2ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55B787512E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B787522E5DF6AD0000C2ED /* Debug */,
+				55B787532E5DF6AD0000C2ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55B787562E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarmTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B787572E5DF6AD0000C2ED /* Debug */,
+				55B787582E5DF6AD0000C2ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55B787592E5DF6AD0000C2ED /* Build configuration list for PBXNativeTarget "NFCAlarmUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B7875A2E5DF6AD0000C2ED /* Debug */,
+				55B7875B2E5DF6AD0000C2ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 55B787252E5DF6AB0000C2ED /* Project object */;
+}

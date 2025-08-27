@@ -1,30 +1,37 @@
 import SwiftUI
 import SwiftData
 
-struct Alarm: Identifiable {
-    let id: UUID
-    let title: String?
-    let hours: Int
-    let minutes: Int
-}
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @State var alarms: [Alarm]
+    @Query private var alarms: [Alarm]
     @State private var isOn: Bool = false
 
     var body: some View {
-        List {
-            ForEach(alarms) { alarm in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(alarm.hours):\(alarm.minutes)")
-                        Text(alarm.title ?? "No title")
+        NavigationView {
+            List {
+                ForEach(alarms) { alarm in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(alarm.hours):\(alarm.minutes)")
+                            Text(alarm.title ?? "No title")
+                        }
+                        Spacer()
+                        Toggle("", isOn: Binding(
+                            get: { alarm.isOn },
+                            set: { newValue in
+                                alarm.isOn = newValue
+                                try? modelContext.save()
+                            })
+                        )
+                            .labelsHidden()
+                            .toggleStyle(SwitchToggleStyle())
                     }
-                    Spacer()
-                    Toggle("", isOn: $isOn)
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle())
+                }.onDelete(perform: deleteItems(offsets:))
+            }
+            .navigationTitle("Alarms")
+            .toolbar {
+                Button(action: addItem) {
+                    Image(systemName: "plus")
                 }
             }
         }
@@ -32,25 +39,23 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            let newAlarm = Alarm(id: UUID(), title: "Alarm", hours: 0, minutes: 50, isOn: false)
+            modelContext.insert(newAlarm)
+            try? modelContext.save()
+//            alarms.append(newAlarm)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-//                modelContext.delete(items[index])
+                modelContext.delete(alarms[index])
             }
         }
     }
 }
 
 #Preview {
-    ContentView(alarms: [
-        .init(id: UUID(), title: "Alarm 1", hours: 00, minutes: 15),
-        .init(id: UUID(), title: "Alarm 2", hours: 00, minutes: 30),
-        .init(id: UUID(), title: "Alarm 3", hours: 00, minutes: 45)
-    ])
-        .modelContainer(for: Item.self, inMemory: true)
+    ContentView()
+        .modelContainer(for: Alarm.self, inMemory: true)
 }

@@ -5,7 +5,7 @@ import SwiftData
 struct NFCAlarmApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Alarm.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -18,10 +18,8 @@ struct NFCAlarmApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(alarms: [.init(id: UUID(), title: "Alarm 1", hours: 00, minutes: 15),
-                                 .init(id: UUID(), title: "Alarm 2", hours: 00, minutes: 30),
-                                 .init(id: UUID(), title: "Alarm 3", hours: 00, minutes: 45)])
+            ContentView()
         }
-//        .modelContainer(sharedModelContainer)
+        .modelContainer(sharedModelContainer)
     }
 }

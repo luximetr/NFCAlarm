@@ -4,34 +4,47 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var alarms: [Alarm]
-    @State private var isOn: Bool = false
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             List {
                 ForEach(alarms) { alarm in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("\(alarm.hours):\(alarm.minutes)")
-                            Text(alarm.title ?? "No title")
-                        }
-                        Spacer()
-                        Toggle("", isOn: Binding(
-                            get: { alarm.isOn },
-                            set: { newValue in
-                                alarm.isOn = newValue
-                                try? modelContext.save()
-                            })
-                        )
+                    NavigationLink(destination: EditAlarmScreenView(alarm: alarm)) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("\(alarm.hours):\(alarm.minutes)")
+                                Text(alarm.title ?? "No title")
+                            }
+                            Spacer()
+                            Toggle("", isOn: Binding(
+                                get: { alarm.isOn },
+                                set: { newValue in
+                                    alarm.isOn = newValue
+                                    try? modelContext.save()
+                                })
+                            )
                             .labelsHidden()
                             .toggleStyle(SwitchToggleStyle())
+                        }
+//                        .onTapGesture {
+//                            path.append("edit")
+//                            print("Tap on alarm")
+//                        }
                     }
                 }.onDelete(perform: deleteItems(offsets:))
             }
             .navigationTitle("Alarms")
             .toolbar {
-                Button(action: addItem) {
+                Button {
+                    path.append("add")
+                } label: {
                     Image(systemName: "plus")
+                }
+            }
+            .navigationDestination(for: String.self) { value in
+                if value == "add" {
+                    AddAlarmScreenView()
                 }
             }
         }
@@ -42,7 +55,6 @@ struct ContentView: View {
             let newAlarm = Alarm(id: UUID(), title: "Alarm", hours: 0, minutes: 50, isOn: false)
             modelContext.insert(newAlarm)
             try? modelContext.save()
-//            alarms.append(newAlarm)
         }
     }
 
@@ -57,5 +69,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Alarm.self, inMemory: true)
+        .modelContainer(for: Alarm.self, inMemory: false)
 }

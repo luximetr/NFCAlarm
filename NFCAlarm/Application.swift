@@ -1,8 +1,10 @@
 import SwiftUI
 import SwiftData
+import NCFAlarmPresentation
 
 @main
-struct NFCAlarmApp: App {
+struct Application: App {
+    @Environment(\.modelContext) private var modelContext
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Alarm.self,
@@ -18,7 +20,7 @@ struct NFCAlarmApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PresentationView()
         }
         .modelContainer(sharedModelContainer)
     }

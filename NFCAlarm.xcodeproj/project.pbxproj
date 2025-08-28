@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		55B7881D2E60A0740000C2ED /* NCFAlarmPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		55B7873F2E5DF6AD0000C2ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B7873E2E5DF6AD0000C2ED /* NFCAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B7881A2E609FA30000C2ED /* NCFAlarmPresentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NCFAlarmPresentation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B7881D2E60A0740000C2ED /* NCFAlarmPresentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +97,8 @@
 				55B7872F2E5DF6AB0000C2ED /* NFCAlarm */,
 				55B787412E5DF6AD0000C2ED /* NFCAlarmTests */,
 				55B7874B2E5DF6AD0000C2ED /* NFCAlarmUITests */,
+				55B7881A2E609FA30000C2ED /* NCFAlarmPresentation */,
+				55B7881B2E60A0740000C2ED /* Frameworks */,
 				55B7872E2E5DF6AB0000C2ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +111,13 @@
 				55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55B7881B2E60A0740000C2ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +140,7 @@
 			);
 			name = NFCAlarm;
 			packageProductDependencies = (
+				55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */,
 			);
 			productName = NFCAlarm;
 			productReference = 55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */;
@@ -579,6 +595,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NCFAlarmPresentation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 55B787252E5DF6AB0000C2ED /* Project object */;
 }

@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @Query private var alarms: [Alarm]
     @State private var path = NavigationPath()
 
@@ -21,7 +20,7 @@ struct ContentView: View {
                                 get: { alarm.isOn },
                                 set: { newValue in
                                     alarm.isOn = newValue
-                                    try? modelContext.save()
+//                                    try? modelContext.save()
                                 })
                             )
                             .labelsHidden()
@@ -53,15 +52,15 @@ struct ContentView: View {
     private func addItem() {
         withAnimation {
             let newAlarm = Alarm(id: UUID(), title: "Alarm", hours: 0, minutes: 50, isOn: false)
-            modelContext.insert(newAlarm)
-            try? modelContext.save()
+//            modelContext.insert(newAlarm)
+//            try? modelContext.save()
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(alarms[index])
+//                modelContext.delete(alarms[index])
             }
         }
     }

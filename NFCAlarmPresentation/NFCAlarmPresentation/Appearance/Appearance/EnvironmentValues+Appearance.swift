@@ -1,15 +1,15 @@
 import SwiftUI
 
-extension EnvironmentValues {
-    var appearance: Appearance {
-        get { self[AppearanceKey.self] }
-        set { self[AppearanceKey.self] = newValue }
-    }
-}
-
-private struct AppearanceKey: @preconcurrency EnvironmentKey {
-    @MainActor static let defaultValue: Appearance = CompositeAppearance(colors: LightAppearanceColors())
-}
+//extension EnvironmentValues {
+//    var appearance: Appearance {
+//        get { self[AppearanceKey.self] }
+//        set { self[AppearanceKey.self] = newValue }
+//    }
+//}
+//
+//private struct AppearanceKey: @preconcurrency EnvironmentKey {
+//    @MainActor static let defaultValue: Appearance = CompositeAppearance(colors: LightAppearanceColors())
+//}
 
 //extension EnvironmentValues {
 //    var localizer: Localizer {

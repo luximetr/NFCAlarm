@@ -1,6 +1,17 @@
 import SwiftUI
 
 struct AddAlarmScreenView: View {
+    
+    // MARK: - Appearance
+            
+    private let appearance: Appearance
+    
+    // MARK: - Init
+    
+    init(appearance: Appearance) {
+        self.appearance = appearance
+    }
+    
 //    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
@@ -11,6 +22,8 @@ struct AddAlarmScreenView: View {
     var body: some View {
         Form {
             Text("Time")
+                .foregroundStyle(.red)
+                .font(.title)
             DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
                 .datePickerStyle(.wheel)
             Toggle("Enabled", isOn: $isOn)
@@ -32,6 +45,7 @@ struct AddAlarmScreenView: View {
 }
 
 #Preview {
-    AddAlarmScreenView()
+    @Previewable @Environment(\.colorScheme) var colorScheme
+    AddAlarmScreenView(appearance: CompositeAppearance(colorScheme: colorScheme))
 //        .modelContainer(for: Alarm.self, inMemory: true)
 }

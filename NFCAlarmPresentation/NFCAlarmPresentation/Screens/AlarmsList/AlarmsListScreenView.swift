@@ -56,7 +56,7 @@ struct AlarmsListScreenView: View {
             }
             .navigationDestination(for: String.self) { value in
                 if value == "add" {
-                    AddAlarmScreenView()
+                    AddAlarmScreenView(appearance: appearance)
                 }
             }
         }

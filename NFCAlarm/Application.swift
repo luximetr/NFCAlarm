@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import NCFAlarmPresentation
+import NFCAlarmStorage
 
 @main
 struct Application: App {
@@ -17,10 +18,16 @@ struct Application: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    init() {
+        self.viewModel = ApplicationViewModel()
+    }
+    
+    let viewModel: ApplicationViewModel
 
     var body: some Scene {
         WindowGroup {
-            PresentationView()
+            PresentationView(viewModel: viewModel.presentationViewModel)
         }
         .modelContainer(sharedModelContainer)
     }

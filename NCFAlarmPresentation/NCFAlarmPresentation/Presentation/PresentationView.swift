@@ -2,13 +2,17 @@ import SwiftUI
 
 public struct PresentationView: View {
     
-    public init() {}
+    var viewModel: PresentationViewModel
+    
+    public init(viewModel: PresentationViewModel) {
+        self.viewModel = viewModel
+    }
     
     public var body: some View {
-        return Text("Presentation")
+        return AlarmsListScreenView()
     }
 }
 
 #Preview {
-    PresentationView()
+    PresentationView(viewModel: PresentationViewModel())
 }

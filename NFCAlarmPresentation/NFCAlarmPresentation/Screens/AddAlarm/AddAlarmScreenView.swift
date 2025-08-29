@@ -22,8 +22,8 @@ struct AddAlarmScreenView: View {
     var body: some View {
         Form {
             Text("Time")
-                .foregroundStyle(.red)
-                .font(.title)
+                .foregroundStyle(appearance.colors.primaryText)
+                .font(appearance.fonts.body)
             DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
                 .datePickerStyle(.wheel)
             Toggle("Enabled", isOn: $isOn)
@@ -41,6 +41,7 @@ struct AddAlarmScreenView: View {
                 dismiss()
             }
         }
+        
     }
 }
 

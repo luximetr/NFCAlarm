@@ -2,6 +2,19 @@ import SwiftUI
 import SwiftData
 
 struct AlarmsListScreenView: View {
+    
+    // MARK: - Appearance
+            
+    private let appearance: Appearance
+    
+    // MARK: - Init
+    
+    init(appearance: Appearance) {
+        self.appearance = appearance
+    }
+    
+    // MARK: - Alarms
+    
     @Query private var alarms: [Alarm]
     @State private var path = NavigationPath()
 
@@ -67,6 +80,6 @@ struct AlarmsListScreenView: View {
 }
 
 #Preview {
-    AlarmsListScreenView()
+    AlarmsListScreenView(appearance: CompositeAppearance(colorScheme: .light))
 //        .modelContainer(for: Alarm.self, inMemory: false)
 }

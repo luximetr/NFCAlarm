@@ -2,6 +2,8 @@ import SwiftUI
 
 public struct PresentationView: View {
     
+    @Environment(\.colorScheme) private var colorScheme
+    
     var viewModel: PresentationViewModel
     
     public init(viewModel: PresentationViewModel) {
@@ -9,7 +11,8 @@ public struct PresentationView: View {
     }
     
     public var body: some View {
-        return AlarmsListScreenView()
+        let appearance = CompositeAppearance(colorScheme: colorScheme)
+        return AlarmsListScreenView(appearance: appearance)
     }
 }
 

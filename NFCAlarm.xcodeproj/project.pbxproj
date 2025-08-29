@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55B7881D2E60A0740000C2ED /* NCFAlarmPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */; };
 		6CC580252E6154B100A757D7 /* NFCAlarmStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC580242E6154B100A757D7 /* NFCAlarmStorage */; };
+		6CC5802C2E61732700A757D7 /* NFCAlarmPresentation in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC5802B2E61732700A757D7 /* NFCAlarmPresentation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +32,8 @@
 		55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NFCAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B7873E2E5DF6AD0000C2ED /* NFCAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B787482E5DF6AD0000C2ED /* NFCAlarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFCAlarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		55B7881A2E609FA30000C2ED /* NCFAlarmPresentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NCFAlarmPresentation; sourceTree = "<group>"; };
 		6CC580232E61546800A757D7 /* NFCAlarmStorage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NFCAlarmStorage; sourceTree = "<group>"; };
+		6CC580282E61720700A757D7 /* NFCAlarmPresentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NFCAlarmPresentation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -72,8 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CC5802C2E61732700A757D7 /* NFCAlarmPresentation in Frameworks */,
 				6CC580252E6154B100A757D7 /* NFCAlarmStorage in Frameworks */,
-				55B7881D2E60A0740000C2ED /* NCFAlarmPresentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +100,7 @@
 				55B7872F2E5DF6AB0000C2ED /* NFCAlarm */,
 				55B787412E5DF6AD0000C2ED /* NFCAlarmTests */,
 				55B7874B2E5DF6AD0000C2ED /* NFCAlarmUITests */,
-				55B7881A2E609FA30000C2ED /* NCFAlarmPresentation */,
+				6CC580282E61720700A757D7 /* NFCAlarmPresentation */,
 				6CC580232E61546800A757D7 /* NFCAlarmStorage */,
 				55B7881B2E60A0740000C2ED /* Frameworks */,
 				55B7872E2E5DF6AB0000C2ED /* Products */,
@@ -144,8 +144,8 @@
 			);
 			name = NFCAlarm;
 			packageProductDependencies = (
-				55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */,
 				6CC580242E6154B100A757D7 /* NFCAlarmStorage */,
+				6CC5802B2E61732700A757D7 /* NFCAlarmPresentation */,
 			);
 			productName = NFCAlarm;
 			productReference = 55B7872D2E5DF6AB0000C2ED /* NFCAlarm.app */;
@@ -602,13 +602,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		55B7881C2E60A0740000C2ED /* NCFAlarmPresentation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NCFAlarmPresentation;
-		};
 		6CC580242E6154B100A757D7 /* NFCAlarmStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NFCAlarmStorage;
+		};
+		6CC5802B2E61732700A757D7 /* NFCAlarmPresentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NFCAlarmPresentation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

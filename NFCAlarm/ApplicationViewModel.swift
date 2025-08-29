@@ -1,5 +1,5 @@
 import Foundation
-import NCFAlarmPresentation
+import NFCAlarmPresentation
 
 class ApplicationViewModel {
     

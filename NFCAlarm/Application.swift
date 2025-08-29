@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-import NCFAlarmPresentation
+import NFCAlarmPresentation
 import NFCAlarmStorage
 
 @main

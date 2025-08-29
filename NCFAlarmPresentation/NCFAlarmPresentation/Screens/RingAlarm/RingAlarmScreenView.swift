@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AlarmRingScreenView: View {
+struct RingAlarmScreenView: View {
     
     var body: some View {
         VStack {
@@ -23,5 +23,5 @@ struct AlarmRingScreenView: View {
 }
 
 #Preview {
-    AlarmRingScreenView()
+    RingAlarmScreenView()
 }

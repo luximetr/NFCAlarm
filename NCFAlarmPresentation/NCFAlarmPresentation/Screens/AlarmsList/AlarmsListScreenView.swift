@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct AlarmsListScreenView: View {
     @Query private var alarms: [Alarm]
     @State private var path = NavigationPath()
 
@@ -67,6 +67,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Alarm.self, inMemory: false)
+    AlarmsListScreenView()
+//        .modelContainer(for: Alarm.self, inMemory: false)
 }

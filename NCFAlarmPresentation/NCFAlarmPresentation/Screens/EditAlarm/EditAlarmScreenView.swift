@@ -1,8 +1,7 @@
 import SwiftUI
-import NCFAlarmPresentation
 
 struct EditAlarmScreenView: View {
-    @Environment(\.modelContext) private var context
+//    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
     @State private var label: String
@@ -42,12 +41,12 @@ struct EditAlarmScreenView: View {
                 alarm.hours = hour
                 alarm.minutes = minute
                 
-                try? context.save()
+//                try? context.save()
                 dismiss()
             }
             Button("Delete") {
-                context.delete(alarm)
-                try? context.save()
+//                context.delete(alarm)
+//                try? context.save()
                 dismiss()
             }
         }
@@ -57,5 +56,5 @@ struct EditAlarmScreenView: View {
 #Preview {
     let alarm = Alarm(id: UUID(), title: "Alarm 1", hours: 10, minutes: 15, isOn: true)
     EditAlarmScreenView(alarm: alarm)
-        .modelContainer(for: Alarm.self, inMemory: true)
+//        .modelContainer(for: Alarm.self, inMemory: true)
 }

@@ -5,30 +5,35 @@ import NFCAlarmStorage
 
 @main
 struct Application: App {
-    @Environment(\.modelContext) private var modelContext
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Alarm.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    
+    // MARK: - View model
+    
+    let viewModel: ApplicationViewModel
+    
+    // MARK: - Init
     
     init() {
         self.viewModel = ApplicationViewModel()
+        do {
+            try self.viewModel.initialize()
+        } catch {
+            print("Initialization failed: \(error)")
+        }
     }
     
-    let viewModel: ApplicationViewModel
+    // MARK: - Content
 
     var body: some Scene {
         WindowGroup {
-            PresentationView(viewModel: viewModel.presentationViewModel)
+            if let presentationViewModel = viewModel.presentationViewModel {
+                PresentationView(viewModel: presentationViewModel)
+            } else {
+                errorView
+            }
         }
-        .modelContainer(sharedModelContainer)
+    }
+    
+    var errorView: some View {
+        Text("Application failed to initialize")
     }
 }

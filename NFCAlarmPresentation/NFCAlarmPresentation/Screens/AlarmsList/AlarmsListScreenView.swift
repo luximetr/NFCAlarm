@@ -7,57 +7,56 @@ struct AlarmsListScreenView: View {
             
     private let appearance: Appearance
     
+    // MARK: - ViewModel
+    
+    private let viewModel: AlarmsListScreenViewModel
+    
     // MARK: - Init
     
-    init(appearance: Appearance) {
+    init(appearance: Appearance, viewModel: AlarmsListScreenViewModel) {
         self.appearance = appearance
+        self.viewModel = viewModel
     }
     
     // MARK: - Alarms
     
-    @Query private var alarms: [Alarm]
+    @State private var alarms: [Alarm] = []
     @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $path) {
-            List {
-                ForEach(alarms) { alarm in
-                    NavigationLink(destination: EditAlarmScreenView(alarm: alarm)) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("\(alarm.hours):\(alarm.minutes)")
-                                Text(alarm.title ?? "No title")
-                            }
-                            Spacer()
-                            Toggle("", isOn: Binding(
-                                get: { alarm.isOn },
-                                set: { newValue in
-                                    alarm.isOn = newValue
-//                                    try? modelContext.save()
-                                })
-                            )
-                            .labelsHidden()
-                            .toggleStyle(SwitchToggleStyle())
+        List {
+            ForEach(alarms) { alarm in
+                NavigationLink(destination: EditAlarmScreenView(alarm: alarm)) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(alarm.hours):\(alarm.minutes)")
+                            Text(alarm.title ?? "No title")
                         }
+                        Spacer()
+                        Toggle("", isOn: Binding(
+                            get: { alarm.isOn },
+                            set: { newValue in
+                                alarm.isOn = newValue
+//                                    try? modelContext.save()
+                            })
+                        )
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle())
+                    }
 //                        .onTapGesture {
 //                            path.append("edit")
 //                            print("Tap on alarm")
 //                        }
-                    }
-                }.onDelete(perform: deleteItems(offsets:))
-            }
-            .navigationTitle("Alarms")
-            .toolbar {
-                Button {
-                    path.append("add")
-                } label: {
-                    Image(systemName: "plus")
                 }
-            }
-            .navigationDestination(for: String.self) { value in
-                if value == "add" {
-                    AddAlarmScreenView(appearance: appearance)
-                }
+            }.onDelete(perform: deleteItems(offsets:))
+        }
+        .navigationTitle("Alarms")
+        .toolbar {
+            Button {
+                viewModel.addAlarmTapped()
+//                path.append(PresentationAlarmRoute.createAlarm)
+            } label: {
+                Image(systemName: "plus")
             }
         }
     }
@@ -80,6 +79,9 @@ struct AlarmsListScreenView: View {
 }
 
 #Preview {
-    AlarmsListScreenView(appearance: CompositeAppearance(colorScheme: .light))
+    AlarmsListScreenView(
+        appearance: CompositeAppearance(colorScheme: .light),
+        viewModel: AlarmsListScreenViewModel()
+    )
 //        .modelContainer(for: Alarm.self, inMemory: false)
 }

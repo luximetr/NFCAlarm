@@ -1,16 +1,22 @@
 import SwiftUI
 
-struct AddAlarmScreenView: View {
+struct CreateAlarmScreenView: View {
+    
+    // MARK: - Init
+    
+    init(appearance: Appearance, viewModel: CreateAlarmScreenViewModel) {
+        self.appearance = appearance
+        self.viewModel = viewModel
+    }
+    
+    // MARK: - ViewModel
+    
+    private let viewModel: CreateAlarmScreenViewModel
     
     // MARK: - Appearance
             
     private let appearance: Appearance
     
-    // MARK: - Init
-    
-    init(appearance: Appearance) {
-        self.appearance = appearance
-    }
     
 //    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -47,6 +53,9 @@ struct AddAlarmScreenView: View {
 
 #Preview {
     @Previewable @Environment(\.colorScheme) var colorScheme
-    AddAlarmScreenView(appearance: CompositeAppearance(colorScheme: colorScheme))
+    CreateAlarmScreenView(
+        appearance: CompositeAppearance(colorScheme: colorScheme),
+        viewModel: CreateAlarmScreenViewModel()
+    )
 //        .modelContainer(for: Alarm.self, inMemory: true)
 }

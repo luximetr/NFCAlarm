@@ -4,15 +4,22 @@ public struct PresentationView: View {
     
     @Environment(\.colorScheme) private var colorScheme
     
-    var viewModel: PresentationViewModel
+    @StateObject var viewModel: PresentationViewModel
     
     public init(viewModel: PresentationViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     public var body: some View {
-        let appearance = CompositeAppearance(colorScheme: colorScheme)
-        return AlarmsListScreenView(appearance: appearance)
+        NavigationStack(path: $viewModel.screenPath) {
+            Text("Loading...")
+                .navigationDestination(for: PresentationAlarmRoute.self) { route in
+                    switch route {
+                    case .alarmsList: viewModel.createAlarmsListScreenView()
+                    case .createAlarm: viewModel.createCreateAlarmScreenView()
+                    }
+                }
+        }
     }
 }
 

@@ -21,5 +21,7 @@ class ApplicationViewModel {
     
     private func initializePresentation() {
         presentationViewModel = PresentationViewModel()
+        weak var weakSelf = self
+        presentationViewModel.addAlarm = weakSelf?.presentationAddAlarm
     }
 }

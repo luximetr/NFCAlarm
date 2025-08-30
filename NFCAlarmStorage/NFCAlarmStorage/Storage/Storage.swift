@@ -5,7 +5,7 @@ public class Storage {
     
     // MARK: - SwiftDataRepository
     
-    private let swiftDataRepository = SwiftDataRepository()
+    let swiftDataRepository = SwiftDataRepository()
     
     // MARK: - Init
     

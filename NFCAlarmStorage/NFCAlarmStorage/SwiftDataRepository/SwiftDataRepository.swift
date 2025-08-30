@@ -19,7 +19,7 @@ final class SwiftDataRepository {
         }
     }
     
-    func createAlarm(_ addingAlarm: AddingAlarm) async throws {
+    func createAlarm(_ addingAlarm: CreatingAlarm) async throws {
         let alarm = Alarm(id: UUID(), title: addingAlarm.name, hours: 0, minutes: 0, isOn: false)
         mainContext.insert(alarm)
         try mainContext.save()

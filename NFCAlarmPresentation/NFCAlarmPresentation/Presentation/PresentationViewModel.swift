@@ -7,8 +7,7 @@ public class PresentationViewModel: ObservableObject {
     // MARK: - Init
     
     public init() {
-//        self.appearance = appearance
-        screenPath.append(PresentationAlarmRoute.alarmsList)
+//        self.appearance = CompositeAppearance(colorScheme: <#T##ColorScheme#>)
     }
     
     // MARK: - Appearance
@@ -17,12 +16,14 @@ public class PresentationViewModel: ObservableObject {
     
     // MARK: - Path
     
-    @State var screenPath = NavigationPath()
+    @Published var screenPath = NavigationPath()
 //    @Published var screenPath: [AnyHashable] = []
     
     // MARK: - Screens view models
     
+    weak var alarmsListScreenViewModel: AlarmsListScreenViewModel?
     weak var createAlarmScreenViewModel: CreateAlarmScreenViewModel?
+    weak var editAlarmScreenViewModel: EditAlarmScreenViewModel?
     
     // MARK: - Alarm
     

@@ -12,14 +12,16 @@ public struct PresentationView: View {
     
     public var body: some View {
         NavigationStack(path: $viewModel.screenPath) {
-            Text("Loading...")
+            viewModel.createAlarmsListScreenView()
                 .navigationDestination(for: PresentationAlarmRoute.self) { route in
                     switch route {
                     case .alarmsList: viewModel.createAlarmsListScreenView()
                     case .createAlarm: viewModel.createCreateAlarmScreenView()
+                    case .editAlarm(let alarm): viewModel.createEditAlarmScreenView(alarm: alarm)
                     }
                 }
         }
+        .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
     }
 }
 

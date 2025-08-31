@@ -4,8 +4,8 @@ import SwiftData
 struct AlarmsListScreenView: View {
     
     // MARK: - Appearance
-            
-    private let appearance: Appearance
+    
+    @Environment(\.appearance) private var appearance
     
     // MARK: - ViewModel
     
@@ -13,8 +13,7 @@ struct AlarmsListScreenView: View {
     
     // MARK: - Init
     
-    init(appearance: Appearance, viewModel: AlarmsListScreenViewModel) {
-        self.appearance = appearance
+    init(viewModel: AlarmsListScreenViewModel) {
         self.viewModel = viewModel
     }
     
@@ -26,27 +25,24 @@ struct AlarmsListScreenView: View {
     var body: some View {
         List {
             ForEach(alarms) { alarm in
-                NavigationLink(destination: EditAlarmScreenView(alarm: alarm)) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("\(alarm.hours):\(alarm.minutes)")
-                            Text(alarm.title ?? "No title")
-                        }
-                        Spacer()
-                        Toggle("", isOn: Binding(
-                            get: { alarm.isOn },
-                            set: { newValue in
-                                alarm.isOn = newValue
-//                                    try? modelContext.save()
-                            })
-                        )
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle())
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(alarm.hours):\(alarm.minutes)")
+                        Text(alarm.title ?? "No title")
                     }
-//                        .onTapGesture {
-//                            path.append("edit")
-//                            print("Tap on alarm")
-//                        }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { alarm.isOn },
+                        set: { newValue in
+                            alarm.isOn = newValue
+//                                    try? modelContext.save()
+                        })
+                    )
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle())
+                }
+                .onTapGesture {
+                    viewModel.editAlarmTapped(alarm)
                 }
             }.onDelete(perform: deleteItems(offsets:))
         }
@@ -80,7 +76,6 @@ struct AlarmsListScreenView: View {
 
 #Preview {
     AlarmsListScreenView(
-        appearance: CompositeAppearance(colorScheme: .light),
         viewModel: AlarmsListScreenViewModel()
     )
 //        .modelContainer(for: Alarm.self, inMemory: false)

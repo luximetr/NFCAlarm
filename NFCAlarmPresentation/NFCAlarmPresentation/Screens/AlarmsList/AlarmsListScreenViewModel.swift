@@ -8,4 +8,10 @@ class AlarmsListScreenViewModel {
     func addAlarmTapped() {
         onAddAlarm?()
     }
+    
+    var onEditAlarm: ((Alarm) -> Void)?
+    
+    func editAlarmTapped(_ alarm: Alarm) {
+        onEditAlarm?(alarm)
+    }
 }

@@ -4,8 +4,7 @@ struct CreateAlarmScreenView: View {
     
     // MARK: - Init
     
-    init(appearance: Appearance, viewModel: CreateAlarmScreenViewModel) {
-        self.appearance = appearance
+    init(viewModel: CreateAlarmScreenViewModel) {
         self.viewModel = viewModel
     }
     
@@ -14,9 +13,8 @@ struct CreateAlarmScreenView: View {
     private let viewModel: CreateAlarmScreenViewModel
     
     // MARK: - Appearance
-            
-    private let appearance: Appearance
     
+    @Environment(\.appearance) private var appearance
     
 //    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -54,8 +52,7 @@ struct CreateAlarmScreenView: View {
 #Preview {
     @Previewable @Environment(\.colorScheme) var colorScheme
     CreateAlarmScreenView(
-        appearance: CompositeAppearance(colorScheme: colorScheme),
         viewModel: CreateAlarmScreenViewModel()
     )
-//        .modelContainer(for: Alarm.self, inMemory: true)
+    .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
 }

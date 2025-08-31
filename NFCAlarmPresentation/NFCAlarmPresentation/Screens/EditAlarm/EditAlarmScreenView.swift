@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct EditAlarmScreenView: View {
-//    @Environment(\.modelContext) private var context
+
+    private let viewModel: EditAlarmScreenViewModel
     @Environment(\.dismiss) private var dismiss
     
     @State private var label: String
@@ -10,7 +11,7 @@ struct EditAlarmScreenView: View {
     
     var alarm: Alarm
     
-    init(alarm: Alarm) {
+    init(alarm: Alarm, viewModel: EditAlarmScreenViewModel) {
         self.alarm = alarm
         self.label = alarm.title ?? ""
         let calendar = Calendar.current
@@ -19,6 +20,7 @@ struct EditAlarmScreenView: View {
         date = calendar.date(bySetting: .minute, value: alarm.minutes, of: date) ?? date
         self.time = date
         self.isOn = alarm.isOn
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -55,6 +57,6 @@ struct EditAlarmScreenView: View {
 
 #Preview {
     let alarm = Alarm(id: UUID(), title: "Alarm 1", hours: 10, minutes: 15, isOn: true)
-    EditAlarmScreenView(alarm: alarm)
+    EditAlarmScreenView(alarm: alarm, viewModel: EditAlarmScreenViewModel())
 //        .modelContainer(for: Alarm.self, inMemory: true)
 }

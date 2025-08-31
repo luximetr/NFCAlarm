@@ -6,10 +6,13 @@ typealias StorageCreatingAlarm = NFCAlarmStorage.CreatingAlarm
 
 class CreatingAlarmMapper {
     
-    static func mapToStorage(_ presentationCreatingAlarm: PresentationCreatingAlarm) -> StorageCreatingAlarm {
-        let alarm = StorageCreatingAlarm(
-            name: presentationCreatingAlarm.name
+    static func mapToStorage(_ alarm: PresentationCreatingAlarm) -> StorageCreatingAlarm {
+        let storageAlarm = StorageCreatingAlarm(
+            name: alarm.name,
+            hours: alarm.hour,
+            minutes: alarm.minute,
+            isOn: true
         )
-        return alarm
+        return storageAlarm
     }
 }

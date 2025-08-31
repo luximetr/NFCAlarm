@@ -23,5 +23,6 @@ public class PresentationViewModel: ObservableObject {
     
     public var getAllAlarms: (() async throws -> [Alarm])?
     public var createAlarm: ((CreatingAlarm) async throws -> Void)?
+    public var editAlarm: ((EditingAlarm) async throws -> Alarm)!
     
 }

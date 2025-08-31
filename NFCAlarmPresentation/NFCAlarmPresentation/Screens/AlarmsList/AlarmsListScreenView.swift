@@ -23,7 +23,24 @@ struct AlarmsListScreenView: View {
 
     var body: some View {
         List(viewModel.alarms) { alarm in
-            Text(alarm.name ?? "No name")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("\(alarm.hours):\(alarm.minutes)")
+                    Text(alarm.name ?? "Alarm")
+                }
+                Spacer()
+                Toggle("", isOn: Binding(
+                    get: { alarm.isOn },
+                    set: { newValue in
+                        viewModel.alarmIsOnTapped(alarm, isOn: newValue)
+                    })
+                )
+                .labelsHidden()
+                .toggleStyle(SwitchToggleStyle())
+            }
+            .onTapGesture {
+                viewModel.editAlarmTapped(alarm)
+            }
         }
 //        List(viewModel.alarms) { alarm in
 //            HStack {
@@ -79,8 +96,12 @@ struct AlarmsListScreenView: View {
 }
 
 #Preview {
-    AlarmsListScreenView(
-        viewModel: AlarmsListScreenViewModel()
+    let viewModel = AlarmsListScreenViewModel()
+    viewModel.onLoadAlarms = {
+        return [Alarm(id: UUID(), name: "Alarm 1", hours: 10, minutes: 15, isOn: true)]
+    }
+    return AlarmsListScreenView(
+        viewModel: viewModel
     )
 //        .modelContainer(for: Alarm.self, inMemory: false)
 }

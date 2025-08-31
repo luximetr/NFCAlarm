@@ -52,6 +52,7 @@ struct EditAlarmScreenView: View {
                 dismiss()
             }
         }
+        .navigationTitle("Edit alarm")
     }
 }
 

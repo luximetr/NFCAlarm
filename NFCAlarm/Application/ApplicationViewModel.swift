@@ -26,7 +26,8 @@ class ApplicationViewModel: ObservableObject {
     private func initializePresentation() {
         presentationViewModel = PresentationViewModel()
         weak var weakSelf = self
-        presentationViewModel.createAlarm = weakSelf?.presentationCreateAlarm
         presentationViewModel.getAllAlarms = weakSelf?.presentationGetAllAlarms
+        presentationViewModel.createAlarm = weakSelf?.presentationCreateAlarm
+        presentationViewModel.editAlarm = weakSelf?.presentationEditAlarm
     }
 }

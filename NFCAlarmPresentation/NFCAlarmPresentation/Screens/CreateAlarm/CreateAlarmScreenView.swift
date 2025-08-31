@@ -41,7 +41,7 @@ struct CreateAlarmScreenView: View {
                 dismiss()
             }
         }
-        
+        .navigationTitle("Create alarm")
     }
 }
 

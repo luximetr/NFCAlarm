@@ -12,6 +12,10 @@ extension PresentationViewModel {
         viewModel.onEditAlarm = { [weak self] alarm in
             self?.screenPath.append(PresentationAlarmRoute.editAlarm(alarm))
         }
+        viewModel.onUpdateAlarm = { [weak self] editingAlarm in
+            guard let self = self else { throw Error.weakSelf }
+            return try await self.editAlarm(editingAlarm)
+        }
         viewModel.onLoadAlarms = { [weak self] in
             try await self?.getAllAlarms?() ?? []
         }

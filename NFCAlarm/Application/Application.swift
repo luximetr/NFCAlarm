@@ -8,32 +8,43 @@ struct Application: App {
     
     // MARK: - View model
     
-    let viewModel: ApplicationViewModel
+    @StateObject var viewModel: ApplicationViewModel
     
     // MARK: - Init
     
     init() {
-        self.viewModel = ApplicationViewModel()
-        do {
-            try self.viewModel.initialize()
-        } catch {
-            print("Initialization failed: \(error)")
-        }
+        _viewModel = StateObject(wrappedValue: ApplicationViewModel())
     }
     
     // MARK: - Content
 
     var body: some Scene {
         WindowGroup {
-            if let presentationViewModel = viewModel.presentationViewModel {
-                PresentationView(viewModel: presentationViewModel)
+            if viewModel.isInitialized {
+                if let presentationViewModel = viewModel.presentationViewModel {
+                    contentView(viewModel: presentationViewModel)
+                } else {
+                    errorView
+                }
             } else {
-                errorView
+                ProgressView()
+                    .onAppear {
+                    do {
+                        try self.viewModel.initialize()
+                    } catch {
+                        print("Initialization failed: \(error)")
+                    }
+                }
             }
+                
         }
     }
     
     var errorView: some View {
         Text("Application failed to initialize")
+    }
+    
+    func contentView(viewModel: PresentationViewModel) -> some View {
+        PresentationView(viewModel: viewModel)
     }
 }

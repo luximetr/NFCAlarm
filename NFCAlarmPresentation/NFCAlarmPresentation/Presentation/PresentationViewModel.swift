@@ -7,17 +7,11 @@ public class PresentationViewModel: ObservableObject {
     // MARK: - Init
     
     public init() {
-//        self.appearance = CompositeAppearance(colorScheme: <#T##ColorScheme#>)
     }
-    
-    // MARK: - Appearance
-    
-//    private(set) var appearance: Appearance
     
     // MARK: - Path
     
     @Published var screenPath = NavigationPath()
-//    @Published var screenPath: [AnyHashable] = []
     
     // MARK: - Screens view models
     
@@ -27,6 +21,7 @@ public class PresentationViewModel: ObservableObject {
     
     // MARK: - Alarm
     
-    public var addAlarm: ((CreatingAlarm) async throws -> Void)?
+    public var getAllAlarms: (() async throws -> [Alarm])?
+    public var createAlarm: ((CreatingAlarm) async throws -> Void)?
     
 }

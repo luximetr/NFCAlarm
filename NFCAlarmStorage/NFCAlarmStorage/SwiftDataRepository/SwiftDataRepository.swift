@@ -20,8 +20,14 @@ final class SwiftDataRepository {
     }
     
     func createAlarm(_ addingAlarm: CreatingAlarm) async throws {
-        let alarm = Alarm(id: UUID(), title: addingAlarm.name, hours: 0, minutes: 0, isOn: false)
+        let alarm = Alarm(id: UUID(), name: addingAlarm.name, hours: 0, minutes: 0, isOn: false)
         mainContext.insert(alarm)
         try mainContext.save()
+    }
+    
+    func fetchAllAlarms() async throws -> [Alarm] {
+        let descriptor = FetchDescriptor<Alarm>()
+        let alarms = try mainContext.fetch(descriptor)
+        return alarms
     }
 }

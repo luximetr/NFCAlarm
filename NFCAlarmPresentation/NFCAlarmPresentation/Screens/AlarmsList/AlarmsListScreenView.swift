@@ -9,43 +9,47 @@ struct AlarmsListScreenView: View {
     
     // MARK: - ViewModel
     
-    private let viewModel: AlarmsListScreenViewModel
+    @StateObject var viewModel: AlarmsListScreenViewModel
     
     // MARK: - Init
     
     init(viewModel: AlarmsListScreenViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: - Alarms
     
-    @State private var alarms: [Alarm] = []
     @State private var path = NavigationPath()
 
     var body: some View {
-        List {
-            ForEach(alarms) { alarm in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(alarm.hours):\(alarm.minutes)")
-                        Text(alarm.title ?? "No title")
-                    }
-                    Spacer()
-                    Toggle("", isOn: Binding(
-                        get: { alarm.isOn },
-                        set: { newValue in
-                            alarm.isOn = newValue
-//                                    try? modelContext.save()
-                        })
-                    )
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle())
-                }
-                .onTapGesture {
-                    viewModel.editAlarmTapped(alarm)
-                }
-            }.onDelete(perform: deleteItems(offsets:))
+        List(viewModel.alarms) { alarm in
+            Text(alarm.name ?? "No name")
         }
+//        List(viewModel.alarms) { alarm in
+//            HStack {
+//                VStack(alignment: .leading) {
+//                    Text("\(alarm.hours):\(alarm.minutes)")
+//                    Text(alarm.title ?? "No title")
+//                }
+//                Spacer()
+//                Toggle("", isOn: Binding(
+//                    get: { alarm.isOn },
+//                    set: { newValue in
+//                        alarm.isOn = newValue
+////                                    try? modelContext.save()
+//                    })
+//                )
+//                .labelsHidden()
+//                .toggleStyle(SwitchToggleStyle())
+//            }
+//            .onTapGesture {
+////                viewModel.editAlarmTapped(alarm)
+//            }
+////            .onDelete(perform: deleteItems(offsets:))
+//        }
+        .onAppear(perform: {
+            viewModel.onAppear()
+        })
         .navigationTitle("Alarms")
         .toolbar {
             Button {
@@ -59,7 +63,7 @@ struct AlarmsListScreenView: View {
 
     private func addItem() {
         withAnimation {
-            let newAlarm = Alarm(id: UUID(), title: "Alarm", hours: 0, minutes: 50, isOn: false)
+            let newAlarm = Alarm(id: UUID(), name: "Alarm", hours: 0, minutes: 50, isOn: false)
 //            modelContext.insert(newAlarm)
 //            try? modelContext.save()
         }

@@ -1,9 +1,7 @@
 import Foundation
-import SwiftData
 
-@Model
-final public class Alarm {
-    public var id: UUID
+public struct Alarm: Identifiable, Sendable, Equatable {
+    public let id: UUID
     public var name: String?
     public var hours: Int
     public var minutes: Int

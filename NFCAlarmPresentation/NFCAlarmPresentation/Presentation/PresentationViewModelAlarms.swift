@@ -12,6 +12,9 @@ extension PresentationViewModel {
         viewModel.onEditAlarm = { [weak self] alarm in
             self?.screenPath.append(PresentationAlarmRoute.editAlarm(alarm))
         }
+        viewModel.onLoadAlarms = { [weak self] in
+            try await self?.getAllAlarms?() ?? []
+        }
         self.alarmsListScreenViewModel = viewModel
         let view = AlarmsListScreenView(viewModel: viewModel)
         return view
@@ -22,6 +25,15 @@ extension PresentationViewModel {
     func createCreateAlarmScreenView() -> CreateAlarmScreenView {
         let viewModel = self.createAlarmScreenViewModel ?? CreateAlarmScreenViewModel()
         self.createAlarmScreenViewModel = viewModel
+        viewModel.onCreateAlarm = { [weak self] creatingAlarm in
+            Task(priority: .userInitiated) {
+                do {
+                    try await self?.createAlarm?(creatingAlarm)
+                } catch {
+                    print(error)
+                }
+            }
+        }
         let view = CreateAlarmScreenView(viewModel: viewModel)
         return view
     }
@@ -38,8 +50,19 @@ extension PresentationViewModel {
 
 // MARK: - Route
 
-enum PresentationAlarmRoute: Hashable {
-    case alarmsList
+enum PresentationAlarmRoute: Hashable, Equatable {
     case createAlarm
     case editAlarm(Alarm)
+    
+    static func == (lhs: PresentationAlarmRoute, rhs: PresentationAlarmRoute) -> Bool {
+        switch (lhs, rhs) {
+        case (.createAlarm, .createAlarm): return true
+        case (.editAlarm(let lhsValue), .editAlarm(let rhsValue)): return lhsValue == rhsValue
+        default: return false
+        }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self)
+    }
 }

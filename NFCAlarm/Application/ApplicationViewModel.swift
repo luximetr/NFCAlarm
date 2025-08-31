@@ -3,25 +3,30 @@ import NFCAlarmPresentation
 import NFCAlarmStorage
 
 @MainActor
-class ApplicationViewModel {
+class ApplicationViewModel: ObservableObject {
     
     var presentationViewModel: PresentationViewModel!
     var storage: Storage!
     
+    @Published var isInitialized: Bool = false
+    
     // MARK: - Init
     
     func initialize() throws {
-        initializeStorage()
+        try initializeStorage()
         initializePresentation()
+        isInitialized = true
     }
     
-    private func initializeStorage() {
+    private func initializeStorage() throws {
         self.storage = Storage()
+        try storage.initialize()
     }
     
     private func initializePresentation() {
         presentationViewModel = PresentationViewModel()
         weak var weakSelf = self
-        presentationViewModel.addAlarm = weakSelf?.presentationAddAlarm
+        presentationViewModel.createAlarm = weakSelf?.presentationCreateAlarm
+        presentationViewModel.getAllAlarms = weakSelf?.presentationGetAllAlarms
     }
 }

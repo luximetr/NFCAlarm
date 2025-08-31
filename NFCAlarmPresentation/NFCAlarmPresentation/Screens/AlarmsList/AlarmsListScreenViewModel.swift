@@ -1,7 +1,21 @@
 import Foundation
 
 @MainActor
-class AlarmsListScreenViewModel {
+class AlarmsListScreenViewModel: ObservableObject {
+    
+    @Published var alarms: [Alarm] = []
+    var onLoadAlarms: (() async throws -> [Alarm])?
+    
+    func onAppear() {
+        Task(priority: .userInitiated) {
+            do {
+                let alarms = try await onLoadAlarms?()
+                self.alarms = alarms ?? []
+            } catch {
+                print(error)
+            }
+        }
+    }
     
     var onAddAlarm: (() -> Void)?
     

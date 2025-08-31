@@ -13,7 +13,7 @@ struct EditAlarmScreenView: View {
     
     init(alarm: Alarm, viewModel: EditAlarmScreenViewModel) {
         self.alarm = alarm
-        self.label = alarm.title ?? ""
+        self.label = alarm.name ?? ""
         let calendar = Calendar.current
         var date = Date()
         date = calendar.date(bySetting: .hour, value: alarm.hours, of: date) ?? date
@@ -38,10 +38,10 @@ struct EditAlarmScreenView: View {
                 let minute = calendar.component(.minute, from: time)
                 let label: String? = self.label.isEmpty ? nil : self.label
                 
-                alarm.title = label
-                alarm.isOn = isOn
-                alarm.hours = hour
-                alarm.minutes = minute
+//                alarm.name = label
+//                alarm.isOn = isOn
+//                alarm.hours = hour
+//                alarm.minutes = minute
                 
 //                try? context.save()
                 dismiss()
@@ -56,7 +56,7 @@ struct EditAlarmScreenView: View {
 }
 
 #Preview {
-    let alarm = Alarm(id: UUID(), title: "Alarm 1", hours: 10, minutes: 15, isOn: true)
+    let alarm = Alarm(id: UUID(), name: "Alarm 1", hours: 10, minutes: 15, isOn: true)
     EditAlarmScreenView(alarm: alarm, viewModel: EditAlarmScreenViewModel())
 //        .modelContainer(for: Alarm.self, inMemory: true)
 }

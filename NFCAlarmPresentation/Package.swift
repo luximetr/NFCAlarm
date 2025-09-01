@@ -23,7 +23,7 @@ let package = Package(
             ],
             path: "NFCAlarmPresentation",
             resources: [
-                .process("Screens/AlarmsList/AlarmsListScreenStrings.xcstrings")
+                .process("Screens/Alarms/AlarmsList/AlarmsListScreenStrings.xcstrings")
             ]
         ),
         .testTarget(

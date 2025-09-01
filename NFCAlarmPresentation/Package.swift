@@ -12,10 +12,19 @@ let package = Package(
             name: "NFCAlarmPresentation",
             targets: ["NFCAlarmPresentation"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/ihormyroniuk/AFoundation.git", branch: "development"),
+    ],
     targets: [
         .target(
             name: "NFCAlarmPresentation",
-            path: "NFCAlarmPresentation"
+            dependencies: [
+                "AFoundation"
+            ],
+            path: "NFCAlarmPresentation",
+            resources: [
+                .process("Screens/AlarmsList/AlarmsListScreenStrings.xcstrings")
+            ]
         ),
         .testTarget(
             name: "NFCAlarmPresentationTests",

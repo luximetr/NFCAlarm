@@ -1,0 +1,15 @@
+{
+  "originHash" : "6d27df04da119849d794163f98e01d492e225059198299a9675ebee8d1033cdc",
+  "pins" : [
+    {
+      "identity" : "afoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ihormyroniuk/AFoundation.git",
+      "state" : {
+        "branch" : "development",
+        "revision" : "9f5afca80eff720aa08a0d5f009f9264e0185d63"
+      }
+    }
+  ],
+  "version" : 3
+}

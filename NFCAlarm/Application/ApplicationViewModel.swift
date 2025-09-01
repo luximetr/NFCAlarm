@@ -29,5 +29,6 @@ class ApplicationViewModel: ObservableObject {
         presentationViewModel.getAllAlarms = weakSelf?.presentationGetAllAlarms
         presentationViewModel.createAlarm = weakSelf?.presentationCreateAlarm
         presentationViewModel.editAlarm = weakSelf?.presentationEditAlarm
+        presentationViewModel.deleteAlarm = weakSelf?.presentationDeleteAlarm
     }
 }

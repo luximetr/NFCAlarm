@@ -13,4 +13,8 @@ extension Storage {
     public func editAlarm(_ editingAlarm: EditingAlarm) async throws -> Alarm {
         return try await swiftDataRepository.editAlarm(editingAlarm)
     }
+    
+    public func deleteAlarm(whereId alarmId: UUID) async throws {
+        try await swiftDataRepository.deleteAlarm(whereId: alarmId)
+    }
 }

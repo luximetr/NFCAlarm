@@ -22,56 +22,38 @@ struct AlarmsListScreenView: View {
     @State private var path = NavigationPath()
 
     var body: some View {
-        List(viewModel.alarms) { alarm in
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("\(alarm.hours):\(alarm.minutes)")
-                    Text(alarm.name ?? "Alarm")
+        List {
+            ForEach(viewModel.alarms) { alarm in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(alarm.hours):\(alarm.minutes)")
+                        Text(alarm.name ?? "Alarm")
+                    }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { alarm.isOn },
+                        set: { newValue in
+                            viewModel.alarmIsOnTapped(alarm, isOn: newValue)
+                        })
+                    )
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle())
                 }
-                Spacer()
-                Toggle("", isOn: Binding(
-                    get: { alarm.isOn },
-                    set: { newValue in
-                        viewModel.alarmIsOnTapped(alarm, isOn: newValue)
-                    })
-                )
-                .labelsHidden()
-                .toggleStyle(SwitchToggleStyle())
+                .onTapGesture {
+                    viewModel.editAlarmTapped(alarm)
+                }
             }
-            .onTapGesture {
-                viewModel.editAlarmTapped(alarm)
+            .onDelete { indexSet in
+                deleteItems(indexSet: indexSet)
             }
         }
-//        List(viewModel.alarms) { alarm in
-//            HStack {
-//                VStack(alignment: .leading) {
-//                    Text("\(alarm.hours):\(alarm.minutes)")
-//                    Text(alarm.title ?? "No title")
-//                }
-//                Spacer()
-//                Toggle("", isOn: Binding(
-//                    get: { alarm.isOn },
-//                    set: { newValue in
-//                        alarm.isOn = newValue
-////                                    try? modelContext.save()
-//                    })
-//                )
-//                .labelsHidden()
-//                .toggleStyle(SwitchToggleStyle())
-//            }
-//            .onTapGesture {
-////                viewModel.editAlarmTapped(alarm)
-//            }
-////            .onDelete(perform: deleteItems(offsets:))
-//        }
         .onAppear(perform: {
             viewModel.onAppear()
         })
-        .navigationTitle("Alarms")
+        .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
         .toolbar {
             Button {
                 viewModel.addAlarmTapped()
-//                path.append(PresentationAlarmRoute.createAlarm)
             } label: {
                 Image(systemName: "plus")
             }
@@ -86,22 +68,25 @@ struct AlarmsListScreenView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
+    private func deleteItems(indexSet: IndexSet) {
+        viewModel.alarmDeleteActivated(indexSet)
+//        withAnimation {
+//            for index in offsets {
 //                modelContext.delete(alarms[index])
-            }
-        }
+//            }
+//        }
     }
 }
 
 #Preview {
-    let viewModel = AlarmsListScreenViewModel()
+    let viewModel = AlarmsListScreenViewModel(locale: Locale(language: .english, scriptCode: nil, regionCode: nil))
     viewModel.onLoadAlarms = {
         return [Alarm(id: UUID(), name: "Alarm 1", hours: 10, minutes: 15, isOn: true)]
     }
-    return AlarmsListScreenView(
-        viewModel: viewModel
-    )
+    return NavigationStack {
+        AlarmsListScreenView(
+            viewModel: viewModel
+        )
+    }
 //        .modelContainer(for: Alarm.self, inMemory: false)
 }

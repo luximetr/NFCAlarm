@@ -19,4 +19,8 @@ extension ApplicationViewModel {
         let presentationUpdatedAlarm = AlarmMapper.mapToPresentation(storageUpdatedAlarm)
         return presentationUpdatedAlarm
     }
+    
+    func presentationDeleteAlarm(_ presentationAlarm: PresentationAlarm) async throws {
+        try await storage.deleteAlarm(whereId: presentationAlarm.id)
+    }
 }

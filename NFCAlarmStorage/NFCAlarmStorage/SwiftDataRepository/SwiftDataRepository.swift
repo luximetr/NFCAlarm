@@ -46,4 +46,15 @@ final class SwiftDataRepository {
         try mainContext.save()
         return alarm
     }
+    
+    func deleteAlarm(whereId alarmId: UUID) async throws {
+        let descriptor = FetchDescriptor<Alarm>(
+            predicate: #Predicate { $0.id == alarmId }
+        )
+        guard let alarm = try mainContext.fetch(descriptor).first else {
+            throw Error("Unable to fetch alarm by id: \(alarmId)")
+        }
+        mainContext.delete(alarm)
+        try mainContext.save()
+    }
 }

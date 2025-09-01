@@ -7,7 +7,12 @@ public class PresentationViewModel: ObservableObject {
     // MARK: - Init
     
     public init() {
+        self.locale = Locale(language: .english, scriptCode: nil, regionCode: nil)
     }
+    
+    // MARK: - Locale
+    
+    var locale: Locale
     
     // MARK: - Path
     
@@ -24,5 +29,6 @@ public class PresentationViewModel: ObservableObject {
     public var getAllAlarms: (() async throws -> [Alarm])?
     public var createAlarm: ((CreatingAlarm) async throws -> Void)?
     public var editAlarm: ((EditingAlarm) async throws -> Alarm)!
+    public var deleteAlarm: ((Alarm) async throws -> Void)!
     
 }

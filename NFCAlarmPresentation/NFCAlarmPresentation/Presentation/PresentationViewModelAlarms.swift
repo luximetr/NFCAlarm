@@ -5,7 +5,7 @@ extension PresentationViewModel {
     // MARK: - Alarms list
     
     func createAlarmsListScreenView() -> AlarmsListScreenView {
-        let viewModel = self.alarmsListScreenViewModel ?? AlarmsListScreenViewModel()
+        let viewModel = self.alarmsListScreenViewModel ?? AlarmsListScreenViewModel(locale: locale)
         viewModel.onAddAlarm = { [weak self] in
             self?.screenPath.append(PresentationAlarmRoute.createAlarm)
         }
@@ -15,6 +15,10 @@ extension PresentationViewModel {
         viewModel.onUpdateAlarm = { [weak self] editingAlarm in
             guard let self = self else { throw Error.weakSelf }
             return try await self.editAlarm(editingAlarm)
+        }
+        viewModel.onDeleteAlarm = { [weak self] alarm in
+            guard let self = self else { throw Error.weakSelf }
+            try await self.deleteAlarm(alarm)
         }
         viewModel.onLoadAlarms = { [weak self] in
             try await self?.getAllAlarms?() ?? []

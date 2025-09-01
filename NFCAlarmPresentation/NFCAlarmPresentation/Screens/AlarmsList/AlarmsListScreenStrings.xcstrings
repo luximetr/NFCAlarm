@@ -1,7 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
+    "navigationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarms"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будильники"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }

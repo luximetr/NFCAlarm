@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Language {
+public enum Language: CaseIterable {
     case english
     case ukrainian
 }

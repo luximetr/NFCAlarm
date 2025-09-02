@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "NFCAlarmPresentation",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17)
     ],

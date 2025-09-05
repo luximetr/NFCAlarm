@@ -2,29 +2,38 @@ import SwiftUI
 
 struct InterfaceSettingsScreenView: View {
     
-    let languages: [Language]
-    @State var selectedLanguage: Language
-    let appearanceSettings: [AppearanceSetting]
-    @State var selectedAppearanceSetting: AppearanceSetting
+    @ObservedObject private var viewModel: InterfaceSettingsScreenViewModel
+    
+    init(viewModel: InterfaceSettingsScreenViewModel) {
+        _viewModel = ObservedObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         Form {
             Section("Language") {
-                ForEach(languages, id: \.self) { language in
-                    selectItem(title: "\(language)", isSelected: language == selectedLanguage, onSelect: {
-                        self.selectedLanguage = language
-                    })
+                List(viewModel.languages, id: \.self) { language in
+                    selectItem(
+                        title: viewModel.languageNameLocalizer.name(language),
+                        isSelected: language == viewModel.selectedLanguage,
+                        onSelect: {
+                            self.viewModel.selectLanguage(language)
+                        }
+                    )
                 }
             }
             Section("Appearance") {
-                ForEach(appearanceSettings, id: \.self) { setting in
-                    selectItem(title: "\(setting)", isSelected: setting == selectedAppearanceSetting, onSelect: {
-                        self.selectedAppearanceSetting = setting
-                    })
+                List(viewModel.appearanceSettings, id: \.self) { setting in
+                    selectItem(
+                        title: viewModel.appearanceSettingNameLocalier.name(setting),
+                        isSelected: setting == viewModel.selectedAppearanceSetting,
+                        onSelect: {
+                            self.viewModel.selectedAppearanceSetting(setting)
+                        }
+                    )
                 }
             }
         }
-        .navigationTitle("Settings")
+        .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
     }
     
     func selectItem(title: String, isSelected: Bool, onSelect: @escaping () -> Void) -> some View {
@@ -43,12 +52,14 @@ struct InterfaceSettingsScreenView: View {
 }
 
 #Preview {
-    NavigationStack {
-        InterfaceSettingsScreenView(
-            languages: Language.allCases,
-            selectedLanguage: .english,
-            appearanceSettings: AppearanceSetting.allCases,
-            selectedAppearanceSetting: .light
-        )
+    let viewModel = InterfaceSettingsScreenViewModel(
+        locale: Locale(language: .english, scriptCode: nil, regionCode: nil),
+        languages: Language.allCases,
+        selectedLanguage: .english,
+        appearanceSettings: AppearanceSetting.allCases,
+        selectedAppearanceSetting: .light
+    )
+    return NavigationStack {
+        InterfaceSettingsScreenView(viewModel: viewModel)
     }
 }

@@ -24,6 +24,8 @@ public class PresentationViewModel: ObservableObject {
     weak var createAlarmScreenViewModel: CreateAlarmScreenViewModel?
     weak var editAlarmScreenViewModel: EditAlarmScreenViewModel?
     
+    weak var interfaceSettingsScreenViewModel: InterfaceSettingsScreenViewModel?
+    
     // MARK: - Alarm
     
     public var getAllAlarms: (() async throws -> [Alarm])?

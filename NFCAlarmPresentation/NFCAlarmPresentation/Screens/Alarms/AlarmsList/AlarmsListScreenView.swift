@@ -52,10 +52,19 @@ struct AlarmsListScreenView: View {
         })
         .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
         .toolbar {
-            Button {
-                viewModel.addAlarmTapped()
-            } label: {
-                Image(systemName: "plus")
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    viewModel.settingsTapped()
+                } label: {
+                    Image(systemName: "gear")
+                }
+            }
+            ToolbarItem {
+                Button {
+                    viewModel.addAlarmTapped()
+                } label: {
+                    Image(systemName: "plus")
+                }
             }
         }
     }

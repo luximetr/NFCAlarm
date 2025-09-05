@@ -19,6 +19,11 @@ public struct PresentationView: View {
                     case .editAlarm(let alarm): viewModel.createEditAlarmScreenView(alarm: alarm)
                     }
                 }
+                .navigationDestination(for: PresentationSettingsRoute.self) { route in
+                    switch route {
+                    case .interfaceSettings: viewModel.createInterfaceSettingsScreenView()
+                    }
+                }
         }
         .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
     }

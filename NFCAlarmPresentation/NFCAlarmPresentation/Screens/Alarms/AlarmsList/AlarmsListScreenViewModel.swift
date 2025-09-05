@@ -85,4 +85,12 @@ class AlarmsListScreenViewModel: ObservableObject {
             alarms.remove(at: index)
         }
     }
+    
+    // MARK: - Settings
+    
+    var onSettingsTapped: (() -> Void)?
+    
+    func settingsTapped() {
+        onSettingsTapped?()
+    }
 }

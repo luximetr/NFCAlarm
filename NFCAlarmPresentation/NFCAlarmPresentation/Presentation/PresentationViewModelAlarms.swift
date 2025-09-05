@@ -23,6 +23,9 @@ extension PresentationViewModel {
         viewModel.onLoadAlarms = { [weak self] in
             try await self?.getAllAlarms?() ?? []
         }
+        viewModel.onSettingsTapped = { [weak self] in
+            self?.screenPath.append(PresentationSettingsRoute.interfaceSettings)
+        }
         self.alarmsListScreenViewModel = viewModel
         let view = AlarmsListScreenView(viewModel: viewModel)
         return view

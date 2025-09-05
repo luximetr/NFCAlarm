@@ -1,9 +1,9 @@
 import Foundation
 import AFoundation
 
-public final class Localizer {
+public final class Localizer: ObservableObject, Localizable {
         
-    private var locale: Locale
+    @Published private var locale: Locale
     private let stringsTableName: String?
     private let stringsdictTableName: String?
     

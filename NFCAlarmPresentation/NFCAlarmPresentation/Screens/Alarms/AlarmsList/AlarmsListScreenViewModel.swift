@@ -1,22 +1,34 @@
 import Foundation
+import Combine
+import SwiftUI
 
 @MainActor
-class AlarmsListScreenViewModel: ObservableObject {
+class AlarmsListScreenViewModel: ObservableObject, Localizable {
     
     // MARK: - Init
     
     init(locale: Locale) {
         self.locale = locale
+        self.localizer = Localizer(locale: locale, stringsTableName: "AlarmsListScreenStrings")
+//        localePublisher.sink { [weak self] locale in
+//            self?.locale = locale
+//        }
+//        .store(in: &cancellables)
     }
+    
+    // MARK: - Cancellables
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Localization
     
     @Published var locale: Locale
+    @ObservedObject var localizer: Localizer
     
-    lazy var localizer: Localizer = {
-        let localizer = Localizer(locale: locale, stringsTableName: "AlarmsListScreenStrings")
-        return localizer
-    }()
+    func setLocale(_ locale: Locale) {
+        self.locale = locale
+        localizer.setLocale(locale)
+    }
     
     // MARK: - View life cycle
     

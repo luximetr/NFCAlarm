@@ -12,7 +12,13 @@ public class PresentationViewModel: ObservableObject {
     
     // MARK: - Locale
     
-    var locale: Locale
+    private(set) var locale: Locale
+    
+    func setLocale(_ locale: Locale) {
+        self.locale = locale
+        alarmsListScreenViewModel?.setLocale(locale)
+        interfaceSettingsScreenViewModel?.setLocale(locale)
+    }
     
     // MARK: - Path
     

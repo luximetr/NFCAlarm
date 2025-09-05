@@ -1,20 +1,20 @@
 import Foundation
 
-final class LanguageNameLocalizer {
+final class LanguageNameLocalizer: Localizable {
     
-    // MARK: - Data
-    
-    private var locale: Locale
-    
-    func changeLocale(_ locale: Locale) {
-        self.locale = locale
-        localizer.setLocale(locale)
-    }
-    
-    // MARK: - Initialization
+    // MARK: - Init
     
     init(locale: Locale) {
         self.locale = locale
+    }
+    
+    // MARK: - Locale
+    
+    @Published private var locale: Locale
+    
+    func setLocale(_ locale: Locale) {
+        self.locale = locale
+        localizer.setLocale(locale)
     }
     
     // MARK: - Localizer

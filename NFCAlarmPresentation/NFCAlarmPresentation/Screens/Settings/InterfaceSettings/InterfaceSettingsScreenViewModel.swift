@@ -1,7 +1,8 @@
 import Foundation
+import SwiftUI
 
 @MainActor
-class InterfaceSettingsScreenViewModel: ObservableObject {
+class InterfaceSettingsScreenViewModel: ObservableObject, Localizable {
     
     // MARK: - Init
     
@@ -13,6 +14,7 @@ class InterfaceSettingsScreenViewModel: ObservableObject {
         selectedAppearanceSetting: AppearanceSetting
     ) {
         self.locale = locale
+        self.localizer = Localizer(locale: locale, stringsTableName: "InterfaceSettingsScreenStrings")
         self.languages = languages
         self.selectedLanguage = selectedLanguage
         self.appearanceSettings = appearanceSettings
@@ -23,10 +25,14 @@ class InterfaceSettingsScreenViewModel: ObservableObject {
     
     @Published var locale: Locale
     
-    lazy var localizer: Localizer = {
-        let localizer = Localizer(locale: locale, stringsTableName: "InterfaceSettingsScreenStrings")
-        return localizer
-    }()
+    func setLocale(_ locale: Locale) {
+        self.locale = locale
+        localizer.setLocale(locale)
+        languageNameLocalizer.setLocale(locale)
+        appearanceSettingNameLocalier.setLocale(locale)
+    }
+    
+    @ObservedObject var localizer: Localizer
     
     lazy var languageNameLocalizer: LanguageNameLocalizer = {
         let localizer = LanguageNameLocalizer(locale: locale)
@@ -43,8 +49,11 @@ class InterfaceSettingsScreenViewModel: ObservableObject {
     let languages: [Language]
     @Published var selectedLanguage: Language
     
+    var onSelectLanguage: ((Language) -> Void)?
+    
     func selectLanguage(_ language: Language) {
         self.selectedLanguage = language
+        onSelectLanguage?(language)
     }
     
     // MARK: - Appearance setting
@@ -52,7 +61,10 @@ class InterfaceSettingsScreenViewModel: ObservableObject {
     let appearanceSettings: [AppearanceSetting]
     @Published var selectedAppearanceSetting: AppearanceSetting
     
+    var onSelectAppearanceSetting: ((AppearanceSetting) -> Void)?
+    
     func selectedAppearanceSetting(_ setting: AppearanceSetting) {
         self.selectedAppearanceSetting = setting
+        onSelectAppearanceSetting?(setting)
     }
 }

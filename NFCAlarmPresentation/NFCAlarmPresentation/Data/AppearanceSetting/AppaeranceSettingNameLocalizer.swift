@@ -1,6 +1,6 @@
 import Foundation
 
-final class AppearanceSettingNameLocalizer {
+final class AppearanceSettingNameLocalizer: Localizable {
     
     // MARK: - Init
     
@@ -10,7 +10,7 @@ final class AppearanceSettingNameLocalizer {
     
     // MARK: - Locale
     
-    private var locale: Locale
+    @Published private var locale: Locale
     
     func setLocale(_ locale: Locale) {
         self.locale = locale

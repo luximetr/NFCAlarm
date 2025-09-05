@@ -20,6 +20,17 @@ struct CompositeAppearance: Appearance {
         self.init(colorScheme: colorScheme, fonts: DefaultAppearanceFonts())
     }
     
+    init(appearanceSetting: AppearanceSetting, colorScheme: ColorScheme) {
+        switch appearanceSetting {
+        case .light:
+            self.init(colorScheme: .light)
+        case .dark:
+            self.init(colorScheme: .dark)
+        case .system:
+            self.init(colorScheme: colorScheme)
+        }
+    }
+    
     private static func createColors(colorScheme: ColorScheme) -> AppearanceColors {
         switch colorScheme {
             case .light: return LightAppearanceColors()

@@ -8,6 +8,9 @@ public class PresentationViewModel: ObservableObject {
     
     public init() {
         self.locale = Locale(language: .english, scriptCode: nil, regionCode: nil)
+        self.appearanceSetting = .system
+        self.appearance = CompositeAppearance(colorScheme: .light)
+        self.colorScheme = .light
     }
     
     // MARK: - Locale
@@ -18,6 +21,24 @@ public class PresentationViewModel: ObservableObject {
         self.locale = locale
         alarmsListScreenViewModel?.setLocale(locale)
         interfaceSettingsScreenViewModel?.setLocale(locale)
+    }
+    
+    // MARK: - Appearance
+    
+    private(set) var appearanceSetting: AppearanceSetting
+    @Published var appearance: Appearance
+    
+    func setAppearanceSetting(_ setting: AppearanceSetting) {
+        self.appearanceSetting = setting
+        appearance = CompositeAppearance(appearanceSetting: appearanceSetting, colorScheme: colorScheme)
+    }
+    
+    private(set) var colorScheme: ColorScheme
+    
+    func setColorScheme(_ colorScheme: ColorScheme) {
+        self.colorScheme = colorScheme
+        guard appearanceSetting == .system else { return }
+        appearance = CompositeAppearance(appearanceSetting: appearanceSetting, colorScheme: colorScheme)
     }
     
     // MARK: - Path

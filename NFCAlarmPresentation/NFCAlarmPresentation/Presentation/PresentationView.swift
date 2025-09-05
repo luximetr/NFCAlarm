@@ -25,7 +25,10 @@ public struct PresentationView: View {
                     }
                 }
         }
-        .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
+        .environment(\.appearance, viewModel.appearance)
+        .onChange(of: colorScheme) {
+            viewModel.setColorScheme(colorScheme)
+        }
     }
 }
 

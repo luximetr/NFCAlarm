@@ -2,11 +2,21 @@ import SwiftUI
 
 struct InterfaceSettingsScreenView: View {
     
-    @ObservedObject private var viewModel: InterfaceSettingsScreenViewModel
+    // MARK: - Init
     
     init(viewModel: InterfaceSettingsScreenViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
+    
+    // MARK: - Appearance
+    
+    @Environment(\.appearance) private var appearance
+    
+    // MARK: - View model
+    
+    @ObservedObject private var viewModel: InterfaceSettingsScreenViewModel
+    
+    // MARK: - Body
     
     var body: some View {
         Form {
@@ -42,16 +52,22 @@ struct InterfaceSettingsScreenView: View {
         } label: {
             HStack {
                 Text(title)
+                    .font(appearance.fonts.body)
+                    .foregroundStyle(appearance.colors.primaryText)
                 Spacer()
                 if isSelected {
                     Image(systemName: "checkmark")
                 }
+            }
+            .background {
+                appearance.colors.primaryBackground
             }
         }
     }
 }
 
 #Preview {
+    @Previewable @Environment(\.colorScheme) var colorScheme
     let viewModel = InterfaceSettingsScreenViewModel(
         locale: Locale(language: .english, scriptCode: nil, regionCode: nil),
         languages: Language.allCases,
@@ -62,4 +78,5 @@ struct InterfaceSettingsScreenView: View {
     return NavigationStack {
         InterfaceSettingsScreenView(viewModel: viewModel)
     }
+    .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
 }

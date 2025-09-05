@@ -17,7 +17,7 @@ extension PresentationViewModel {
             self?.setLocale(Locale(language: language, scriptCode: nil, regionCode: nil))
         }
         viewModel.onSelectAppearanceSetting = { [weak self] setting in
-            
+            self?.setAppearanceSetting(setting)
         }
         let view = InterfaceSettingsScreenView(viewModel: viewModel)
         return view

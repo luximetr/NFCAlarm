@@ -17,6 +17,7 @@ public struct PresentationView: View {
                     switch route {
                     case .createAlarm: viewModel.createCreateAlarmScreenView()
                     case .editAlarm(let alarm): viewModel.createEditAlarmScreenView(alarm: alarm)
+                    case .ringAlarm: viewModel.createRingAlarmScreenView()
                     }
                 }
                 .navigationDestination(for: PresentationSettingsRoute.self) { route in

@@ -10,7 +10,8 @@ extension PresentationViewModel {
             self?.screenPath.append(PresentationAlarmRoute.createAlarm)
         }
         viewModel.onEditAlarm = { [weak self] alarm in
-            self?.screenPath.append(PresentationAlarmRoute.editAlarm(alarm))
+//            self?.screenPath.append(PresentationAlarmRoute.editAlarm(alarm))
+            self?.screenPath.append(PresentationAlarmRoute.ringAlarm)
         }
         viewModel.onUpdateAlarm = { [weak self] editingAlarm in
             guard let self = self else { throw Error.weakSelf }
@@ -57,6 +58,15 @@ extension PresentationViewModel {
         let view = EditAlarmScreenView(alarm: alarm, viewModel: viewModel)
         return view
     }
+    
+    // MARK: - Ring alarm
+    
+    func createRingAlarmScreenView() -> RingAlarmScreenView {
+        let viewModel = self.ringAlarmScreenViewModel ?? RingAlarmScreenViewModel()
+        self.ringAlarmScreenViewModel = viewModel
+        let view = RingAlarmScreenView(viewModel: viewModel)
+        return view
+    }
 }
 
 // MARK: - Route
@@ -64,6 +74,7 @@ extension PresentationViewModel {
 enum PresentationAlarmRoute: Hashable, Equatable {
     case createAlarm
     case editAlarm(Alarm)
+    case ringAlarm
     
     static func == (lhs: PresentationAlarmRoute, rhs: PresentationAlarmRoute) -> Bool {
         switch (lhs, rhs) {

@@ -50,6 +50,7 @@ public class PresentationViewModel: ObservableObject {
     weak var alarmsListScreenViewModel: AlarmsListScreenViewModel?
     weak var createAlarmScreenViewModel: CreateAlarmScreenViewModel?
     weak var editAlarmScreenViewModel: EditAlarmScreenViewModel?
+    weak var ringAlarmScreenViewModel: RingAlarmScreenViewModel?
     
     weak var interfaceSettingsScreenViewModel: InterfaceSettingsScreenViewModel?
     

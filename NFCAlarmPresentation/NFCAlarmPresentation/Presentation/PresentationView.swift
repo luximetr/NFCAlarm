@@ -25,6 +25,7 @@ public struct PresentationView: View {
                     }
                 }
         }
+        .tint(viewModel.appearance.colors.accent)
         .environment(\.appearance, viewModel.appearance)
         .onChange(of: colorScheme) {
             viewModel.setColorScheme(colorScheme)

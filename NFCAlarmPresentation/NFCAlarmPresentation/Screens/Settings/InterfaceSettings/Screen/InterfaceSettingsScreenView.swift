@@ -8,20 +8,20 @@ struct InterfaceSettingsScreenView: View {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
     
-    // MARK: - Appearance
-    
-    @Environment(\.appearance) private var appearance
-    
     // MARK: - View model
     
     @ObservedObject private var viewModel: InterfaceSettingsScreenViewModel
     
+    // MARK: - Appearance
+    
+    @Environment(\.appearance) private var appearance
+    
     // MARK: - Body
     
     var body: some View {
-        Form {
-            Section("Language") {
-                List(viewModel.languages, id: \.self) { language in
+        List {
+            section(viewModel.localizer.localizeText("languageSectionTitle")) {
+                ForEach(viewModel.languages, id: \.self) { language in
                     selectItem(
                         title: viewModel.languageNameLocalizer.name(language),
                         isSelected: language == viewModel.selectedLanguage,
@@ -31,8 +31,8 @@ struct InterfaceSettingsScreenView: View {
                     )
                 }
             }
-            Section("Appearance") {
-                List(viewModel.appearanceSettings, id: \.self) { setting in
+            section(viewModel.localizer.localizeText("appearanceSectionTitle")) {
+                ForEach(viewModel.appearanceSettings, id: \.self) { setting in
                     selectItem(
                         title: viewModel.appearanceSettingNameLocalier.name(setting),
                         isSelected: setting == viewModel.selectedAppearanceSetting,
@@ -43,7 +43,19 @@ struct InterfaceSettingsScreenView: View {
                 }
             }
         }
+        .listStyle(.inset)
+        .scrollContentBackground(.hidden)
+        .background(appearance.colors.primaryBackground.ignoresSafeArea())
         .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
+    }
+    
+    @ViewBuilder
+    func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        Section(content: content, header: {
+            Text(title)
+                .font(appearance.fonts.headline)
+                .foregroundStyle(appearance.colors.tertiaryText)
+        })
     }
     
     func selectItem(title: String, isSelected: Bool, onSelect: @escaping () -> Void) -> some View {
@@ -57,12 +69,11 @@ struct InterfaceSettingsScreenView: View {
                 Spacer()
                 if isSelected {
                     Image(systemName: "checkmark")
+                        .foregroundStyle(appearance.colors.accent)
                 }
             }
-            .background {
-                appearance.colors.primaryBackground
-            }
         }
+        .listRowBackground(appearance.colors.primaryBackground)
     }
 }
 

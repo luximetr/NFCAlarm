@@ -47,9 +47,7 @@ struct AlarmsListScreenView: View {
                 deleteItems(indexSet: indexSet)
             }
         }
-        .onAppear(perform: {
-            viewModel.onAppear()
-        })
+        .listStyle(.inset)
         .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -66,6 +64,9 @@ struct AlarmsListScreenView: View {
                     Image(systemName: "plus")
                 }
             }
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
 

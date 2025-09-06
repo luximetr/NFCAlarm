@@ -24,6 +24,7 @@ class InterfaceSettingsScreenViewModel: ObservableObject, Localizable {
     // MARK: - Localization
     
     @Published var locale: Locale
+    @ObservedObject var localizer: Localizer
     
     func setLocale(_ locale: Locale) {
         self.locale = locale
@@ -31,8 +32,6 @@ class InterfaceSettingsScreenViewModel: ObservableObject, Localizable {
         languageNameLocalizer.setLocale(locale)
         appearanceSettingNameLocalier.setLocale(locale)
     }
-    
-    @ObservedObject var localizer: Localizer
     
     lazy var languageNameLocalizer: LanguageNameLocalizer = {
         let localizer = LanguageNameLocalizer(locale: locale)

@@ -16,8 +16,7 @@ struct CreateAlarmScreenView: View {
     
     @Environment(\.appearance) private var appearance
     
-//    @Environment(\.modelContext) private var context
-    @Environment(\.dismiss) private var dismiss
+    // MARK: - Body
     
     var body: some View {
         Form {
@@ -29,26 +28,34 @@ struct CreateAlarmScreenView: View {
             TextField(text: $viewModel.name) {
                 Text("Label (optional)")
             }
-            Button("Save") {
-//                let calendar = Calendar.current
-//                let hour = calendar.component(.hour, from: time)
-//                let minute = calendar.component(.minute, from: time)
-//                let label: String? = self.label.isEmpty ? nil : self.label
-//                let newAlarm = Alarm(id: UUID(), title: label, hours: hour, minutes: minute, isOn: isOn)
-//                context.insert(newAlarm)
-//                try? context.save()
+            Button(viewModel.localizer.localizeText("continueButtonTitle")) {
                 viewModel.saveAlarmTapped()
-                dismiss()
             }
         }
-        .navigationTitle("Create alarm")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            navigationTitle()
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func navigationTitle() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Text(viewModel.localizer.localizeText("navigationTitle"))
+                .foregroundStyle(appearance.colors.primaryText)
+                .font(appearance.fonts.headline)
+        }
     }
 }
 
 #Preview {
     @Previewable @Environment(\.colorScheme) var colorScheme
-    CreateAlarmScreenView(
-        viewModel: CreateAlarmScreenViewModel()
-    )
+    let viewModel = CreateAlarmScreenViewModel(locale: Locale(language: .english, scriptCode: nil, regionCode: nil))
+    
+    return NavigationStack {
+        CreateAlarmScreenView(
+            viewModel: viewModel
+        )
+    }
     .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
 }

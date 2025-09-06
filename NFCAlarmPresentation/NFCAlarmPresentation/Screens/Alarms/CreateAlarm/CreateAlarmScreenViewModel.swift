@@ -1,7 +1,25 @@
 import Foundation
+import SwiftUI
 
 @MainActor
-class CreateAlarmScreenViewModel: ObservableObject {
+class CreateAlarmScreenViewModel: ObservableObject, Localizable {
+    
+    // MARK: - Init
+    
+    init(locale: Locale) {
+        self.locale = locale
+        self.localizer = Localizer(locale: locale, stringsTableName: "CreateAlarmScreenStrings")
+    }
+    
+    // MARK: - Localization
+    
+    @Published var locale: Locale
+    @ObservedObject var localizer: Localizer
+    
+    func setLocale(_ locale: Locale) {
+        self.locale = locale
+        localizer.setLocale(locale)
+    }
     
     // MARK: - Time
     
@@ -10,6 +28,7 @@ class CreateAlarmScreenViewModel: ObservableObject {
     // MARK: - Name
     
     @Published var name = ""
+    
     
     // MARK: - Create alarm
     

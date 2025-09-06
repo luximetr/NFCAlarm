@@ -46,7 +46,19 @@ struct InterfaceSettingsScreenView: View {
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(appearance.colors.primaryBackground.ignoresSafeArea())
-        .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            navigationTitle()
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func navigationTitle() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Text(viewModel.localizer.localizeText("navigationTitle"))
+                .foregroundStyle(appearance.colors.primaryText)
+                .font(appearance.fonts.headline)
+        }
     }
     
     @ViewBuilder
@@ -68,7 +80,7 @@ struct InterfaceSettingsScreenView: View {
                     .foregroundStyle(appearance.colors.primaryText)
                 Spacer()
                 if isSelected {
-                    Image(systemName: "checkmark")
+                    appearance.images.checkmark
                         .foregroundStyle(appearance.colors.accent)
                 }
             }

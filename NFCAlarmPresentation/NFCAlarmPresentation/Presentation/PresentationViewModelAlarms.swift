@@ -34,7 +34,7 @@ extension PresentationViewModel {
     // MARK: - Create alarm
     
     func createCreateAlarmScreenView() -> CreateAlarmScreenView {
-        let viewModel = self.createAlarmScreenViewModel ?? CreateAlarmScreenViewModel()
+        let viewModel = self.createAlarmScreenViewModel ?? CreateAlarmScreenViewModel(locale: locale)
         self.createAlarmScreenViewModel = viewModel
         viewModel.onCreateAlarm = { [weak self] creatingAlarm in
             Task(priority: .userInitiated) {

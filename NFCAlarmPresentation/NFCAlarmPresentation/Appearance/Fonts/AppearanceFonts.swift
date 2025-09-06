@@ -7,5 +7,5 @@ protocol AppearanceFonts {
     var title3: Font { get }
     var body: Font { get }
     var headline: Font { get }
-
+    
 }

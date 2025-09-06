@@ -3,92 +3,104 @@ import SwiftData
 
 struct AlarmsListScreenView: View {
     
-    // MARK: - Appearance
-    
-    @Environment(\.appearance) private var appearance
-    
-    // MARK: - ViewModel
-    
-    @StateObject var viewModel: AlarmsListScreenViewModel
-    
     // MARK: - Init
     
     init(viewModel: AlarmsListScreenViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
-    // MARK: - Alarms
+    // MARK: - ViewModel
     
-    @State private var path = NavigationPath()
+    @StateObject var viewModel: AlarmsListScreenViewModel
+    
+    // MARK: - Appearance
+    
+    @Environment(\.appearance) private var appearance
+    
+    // MARK: - Body
 
     var body: some View {
         List {
             ForEach(viewModel.alarms) { alarm in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(alarm.hours):\(alarm.minutes)")
-                        Text(alarm.name ?? "Alarm")
-                    }
-                    Spacer()
-                    Toggle("", isOn: Binding(
-                        get: { alarm.isOn },
-                        set: { newValue in
-                            viewModel.alarmIsOnTapped(alarm, isOn: newValue)
-                        })
-                    )
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle())
-                }
+                alarmItem(alarm: alarm)
                 .onTapGesture {
                     viewModel.editAlarmTapped(alarm)
                 }
             }
             .onDelete { indexSet in
-                deleteItems(indexSet: indexSet)
+                viewModel.alarmDeleteActivated(indexSet)
             }
         }
         .listStyle(.inset)
-        .navigationTitle(viewModel.localizer.localizeText("navigationTitle"))
+        .scrollContentBackground(.hidden)
+        .background(appearance.colors.primaryBackground.ignoresSafeArea())
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    viewModel.settingsTapped()
-                } label: {
-                    Image(systemName: "gear")
-                }
-            }
-            ToolbarItem {
-                Button {
-                    viewModel.addAlarmTapped()
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
+            settingsButton()
+            navigationTitle()
+            addButton()
         }
         .onAppear {
             viewModel.onAppear()
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newAlarm = Alarm(id: UUID(), name: "Alarm", hours: 0, minutes: 50, isOn: false)
-//            modelContext.insert(newAlarm)
-//            try? modelContext.save()
+    
+    @ToolbarContentBuilder
+    private func navigationTitle() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Text(viewModel.localizer.localizeText("navigationTitle"))
+                .foregroundStyle(appearance.colors.primaryText)
+                .font(appearance.fonts.headline)
         }
     }
-
-    private func deleteItems(indexSet: IndexSet) {
-        viewModel.alarmDeleteActivated(indexSet)
-//        withAnimation {
-//            for index in offsets {
-//                modelContext.delete(alarms[index])
-//            }
-//        }
+    
+    @ToolbarContentBuilder
+    private func settingsButton() -> some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button {
+                viewModel.settingsTapped()
+            } label: {
+                appearance.images.settings
+            }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func addButton() -> some ToolbarContent {
+        ToolbarItem {
+            Button {
+                viewModel.addAlarmTapped()
+            } label: {
+                appearance.images.plus
+            }
+        }
+    }
+    
+    private func alarmItem(alarm: Alarm) -> some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("\(alarm.hours):\(alarm.minutes)")
+                    .font(appearance.fonts.body)
+                    .foregroundStyle(appearance.colors.primaryText)
+                Text(alarm.name ?? "Alarm")
+                    .font(appearance.fonts.body)
+                    .foregroundStyle(appearance.colors.tertiaryText)
+            }
+            Spacer()
+            Toggle("", isOn: Binding(
+                get: { alarm.isOn },
+                set: { newValue in
+                    viewModel.alarmIsOnTapped(alarm, isOn: newValue)
+                })
+            )
+            .labelsHidden()
+            .toggleStyle(SwitchToggleStyle())
+        }
     }
 }
 
 #Preview {
+    @Previewable @Environment(\.colorScheme) var colorScheme
     let viewModel = AlarmsListScreenViewModel(locale: Locale(language: .english, scriptCode: nil, regionCode: nil))
     viewModel.onLoadAlarms = {
         return [Alarm(id: UUID(), name: "Alarm 1", hours: 10, minutes: 15, isOn: true)]
@@ -98,5 +110,5 @@ struct AlarmsListScreenView: View {
             viewModel: viewModel
         )
     }
-//        .modelContainer(for: Alarm.self, inMemory: false)
+    .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
 }

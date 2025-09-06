@@ -5,19 +5,22 @@ struct CompositeAppearance: Appearance {
     
     let colors: AppearanceColors
     let fonts: AppearanceFonts
+    let images: AppearanceImages
     
-    init(colors: any AppearanceColors, fonts: any AppearanceFonts) {
+    init(colors: any AppearanceColors, fonts: any AppearanceFonts, images: any AppearanceImages) {
         self.colors = colors
         self.fonts = fonts
+        self.images = images
     }
     
-    init(colorScheme: ColorScheme, fonts: any AppearanceFonts) {
+    init(colorScheme: ColorScheme, fonts: any AppearanceFonts, images: any AppearanceImages) {
         self.colors = CompositeAppearance.createColors(colorScheme: colorScheme)
         self.fonts = fonts
+        self.images = images
     }
     
     init(colorScheme: ColorScheme) {
-        self.init(colorScheme: colorScheme, fonts: DefaultAppearanceFonts())
+        self.init(colorScheme: colorScheme, fonts: DefaultAppearanceFonts(), images: DefaultAppearanceImages())
     }
     
     init(appearanceSetting: AppearanceSetting, colorScheme: ColorScheme) {

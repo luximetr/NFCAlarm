@@ -33,46 +33,30 @@ struct AlarmsListScreenView: View {
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(appearance.colors.primaryBackground.ignoresSafeArea())
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            settingsButton()
-            navigationTitle()
-            addButton()
-        }
+        .background(appearance.colors.primaryBackground)
+        .titleLeadingTrailingViewNavigationBar(
+            title: viewModel.localizer.localizeText("navigationTitle"),
+            leadingView: settingsButton,
+            trailingView: addButton
+        )
         .onAppear {
             viewModel.onAppear()
         }
     }
     
-    @ToolbarContentBuilder
-    private func navigationTitle() -> some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            Text(viewModel.localizer.localizeText("navigationTitle"))
-                .foregroundStyle(appearance.colors.primaryText)
-                .font(appearance.fonts.headline)
+    private func settingsButton() -> some View {
+        Button {
+            viewModel.settingsTapped()
+        } label: {
+            appearance.images.settings
         }
     }
     
-    @ToolbarContentBuilder
-    private func settingsButton() -> some ToolbarContent {
-        ToolbarItem(placement: .topBarLeading) {
-            Button {
-                viewModel.settingsTapped()
-            } label: {
-                appearance.images.settings
-            }
-        }
-    }
-    
-    @ToolbarContentBuilder
-    private func addButton() -> some ToolbarContent {
-        ToolbarItem {
-            Button {
-                viewModel.addAlarmTapped()
-            } label: {
-                appearance.images.plus
-            }
+    private func addButton() -> some View {
+        Button {
+            viewModel.addAlarmTapped()
+        } label: {
+            appearance.images.plus
         }
     }
     

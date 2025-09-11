@@ -1,20 +1,18 @@
 import SwiftUI
 
-struct NavigationBarSystemIconButton: View {
+struct NavigationBarImageButton: View {
     
-    var iconName: String
+    var image: Image
     var action: () -> Void
     
     var body: some View {
         Button {
             action()
         } label: {
-            Image(systemName: iconName)
+            image
                 .resizable()
                 .scaledToFit()
                 .frame(width: 24, height: 24)
         }
     }
 }
-
-

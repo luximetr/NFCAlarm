@@ -35,6 +35,7 @@ struct LeftRightButtonTitleNavigationBarScreenView<Content: View, NavigationLeft
 }
 
 struct TitleLeadingTrailingViewNavigationBarTitleModifier<NavigationLeftIcon: View, NavigationRightIcon: View>: ViewModifier {
+    
     let title: String
     @ViewBuilder var leadingView: () -> NavigationLeftIcon
     @ViewBuilder var trailingView: () -> NavigationRightIcon

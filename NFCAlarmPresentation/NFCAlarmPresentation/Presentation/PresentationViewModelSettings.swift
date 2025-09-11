@@ -13,6 +13,9 @@ extension PresentationViewModel {
             selectedAppearanceSetting: .light
         )
         self.interfaceSettingsScreenViewModel = viewModel
+        viewModel.onBackTapped = { [weak self] in
+            self?.screenPath.removeLast()
+        }
         viewModel.onSelectLanguage = { [weak self] language in
             self?.setLocale(Locale(language: language, scriptCode: nil, regionCode: nil))
         }

@@ -43,6 +43,14 @@ class InterfaceSettingsScreenViewModel: ObservableObject, Localizable {
         return localizer
     }()
     
+    // MARK: - Back
+    
+    var onBackTapped: (() -> Void)?
+    
+    func backButtonTapped() {
+        onBackTapped?()
+    }
+    
     // MARK: - Languages
     
     let languages: [Language]

@@ -46,9 +46,11 @@ struct InterfaceSettingsScreenView: View {
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(appearance.colors.primaryBackground.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            navigationTitle()
+        .titleBackNavigationBar(title: viewModel.localizer.localizeText("navigationTitle")) {
+            viewModel.backButtonTapped()
         }
     }
     

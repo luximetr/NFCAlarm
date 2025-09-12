@@ -77,9 +77,11 @@ struct AlarmsListScreenView: View {
                     viewModel.alarmIsOnTapped(alarm, isOn: newValue)
                 })
             )
+            .tint(appearance.colors.accent)
             .labelsHidden()
             .toggleStyle(SwitchToggleStyle())
         }
+        .listRowBackground(appearance.colors.primaryBackground)
     }
 }
 

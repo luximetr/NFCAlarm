@@ -29,6 +29,8 @@ struct BackTitleNavigationBarScreenView<Content: View>: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
@@ -71,7 +73,9 @@ extension View {
 
 #Preview("Modifier") {
     @Previewable @Environment(\.colorScheme) var colorScheme
+    let appearance = CompositeAppearance(colorScheme: colorScheme)
     Text("Content")
         .titleBackNavigationBar(title: "Title", backAction: {})
-        .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
+        .background(appearance.colors.primaryBackground)
+        .environment(\.appearance, appearance)
 }

@@ -31,6 +31,8 @@ struct LeftRightButtonTitleNavigationBarScreenView<Content: View, NavigationLeft
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

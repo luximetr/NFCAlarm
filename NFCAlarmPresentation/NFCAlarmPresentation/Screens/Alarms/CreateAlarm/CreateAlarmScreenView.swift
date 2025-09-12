@@ -19,23 +19,25 @@ struct CreateAlarmScreenView: View {
     // MARK: - Body
     
     var body: some View {
-        TitleNavigationBarScreenView(title: viewModel.localizer.localizeText("navigationTitle")) {
-            ScrollView {
-                Text("Time")
-                    .foregroundStyle(appearance.colors.primaryText)
-                    .font(appearance.fonts.body)
-                DatePicker("", selection: $viewModel.time, displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.wheel)
-                TextField(text: $viewModel.name) {
-                    Text("Label (optional)")
-                }
-                Button(viewModel.localizer.localizeText("continueButtonTitle")) {
-                    viewModel.saveAlarmTapped()
-                }
-                CircularMinutePicker()
-                
-                RotatingMinuteDial()
+        ScrollView {
+            Text("Time")
+                .foregroundStyle(appearance.colors.primaryText)
+                .font(appearance.fonts.body)
+            DatePicker("", selection: $viewModel.time, displayedComponents: .hourAndMinute)
+                .datePickerStyle(.wheel)
+            TextField(text: $viewModel.name) {
+                Text("Label (optional)")
             }
+            Button(viewModel.localizer.localizeText("continueButtonTitle")) {
+                viewModel.saveAlarmTapped()
+            }
+            CircularMinutePicker()
+            
+            RotatingMinuteDial()
+        }
+        .background(appearance.colors.primaryBackground)
+        .titleBackNavigationBar(title: viewModel.localizer.localizeText("navigationTitle")) {
+            viewModel.backButtonTapped()
         }
     }
     

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TitleNavigationBarScreenView<Content: View>: View {
+private struct TitleNavigationBarScreenView<Content: View>: View {
     
     @Environment(\.appearance) private var appearance
     
@@ -53,11 +53,12 @@ extension View {
 
 #Preview("Content") {
     @Previewable @Environment(\.colorScheme) var colorScheme
+    let appearance = CompositeAppearance(colorScheme: colorScheme)
     TitleNavigationBarScreenView(title: "Title") {
         Text("Content")
     }
-    .background(.blue)
-    .environment(\.appearance, CompositeAppearance(colorScheme: colorScheme))
+    .background(appearance.colors.primaryBackground)
+    .environment(\.appearance, appearance)
 }
 
 #Preview("List") {

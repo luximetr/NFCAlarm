@@ -37,6 +37,9 @@ extension PresentationViewModel {
     func createCreateAlarmScreenView() -> CreateAlarmScreenView {
         let viewModel = self.createAlarmScreenViewModel ?? CreateAlarmScreenViewModel(locale: locale)
         self.createAlarmScreenViewModel = viewModel
+        viewModel.onBackTapped = { [weak self] in
+            self?.screenPath.removeLast()
+        }
         viewModel.onCreateAlarm = { [weak self] creatingAlarm in
             Task(priority: .userInitiated) {
                 do {

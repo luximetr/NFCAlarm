@@ -21,6 +21,14 @@ class CreateAlarmScreenViewModel: ObservableObject, Localizable {
         localizer.setLocale(locale)
     }
     
+    // MARK: - Back
+    
+    var onBackTapped: (() -> Void)?
+    
+    func backButtonTapped() {
+        onBackTapped?()
+    }
+    
     // MARK: - Time
     
     @Published var time = Date()
@@ -28,7 +36,6 @@ class CreateAlarmScreenViewModel: ObservableObject, Localizable {
     // MARK: - Name
     
     @Published var name = ""
-    
     
     // MARK: - Create alarm
     

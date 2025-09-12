@@ -2,13 +2,15 @@ import SwiftUI
 
 struct NavigationBarView<TitleView: View>: View {
     
+    @Environment(\.appearance) private var appearance
+    
     @ViewBuilder var content: () -> TitleView
     
     var body: some View {
         ZStack {
-            Color.clear
-                .background(.ultraThinMaterial)
-            
+            BlurView(style: .systemUltraThinMaterialLight)
+                .ignoresSafeArea(edges: .top)
+                
             content()
             
         }
@@ -17,19 +19,16 @@ struct NavigationBarView<TitleView: View>: View {
     }
 }
 
-#Preview {
-    ZStack {
-        ScrollView {
-            VStack {
-                Text("Text")
-                Text("Text 2")
-                Text("Text 3")
-                Text("Text 4")
-            }
-            .padding(.top, 44)
-        }
-        NavigationBarView {
-            Text("Title")
-        }
+#Preview("List") {
+    @Previewable @Environment(\.colorScheme) var colorScheme
+    let appearance = CompositeAppearance(colorScheme: .light)
+    List {
+        Text("Item")
+            .foregroundStyle(.white)
+            .listRowBackground(Color.blue)
     }
+    .scrollContentBackground(.hidden)
+    .background(appearance.colors.primaryBackground)
+    .titleNavigationBar(title: "Title")
+    .environment(\.appearance, appearance)
 }

@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 struct AlarmsListScreenView: View {
     
@@ -21,6 +20,8 @@ struct AlarmsListScreenView: View {
 
     var body: some View {
         List {
+            ClockView()
+                .frame(height: 150)
             ForEach(viewModel.alarms) { alarm in
                 alarmItem(alarm: alarm)
                 .onTapGesture {
@@ -62,13 +63,33 @@ struct AlarmsListScreenView: View {
     
     private func alarmItem(alarm: Alarm) -> some View {
         HStack {
+            SleepChartView()
             VStack(alignment: .leading) {
                 Text("\(alarm.hours):\(alarm.minutes)")
-                    .font(appearance.fonts.body)
+                    .font(appearance.fonts.title1)
                     .foregroundStyle(appearance.colors.primaryText)
                 Text(alarm.name ?? "Alarm")
                     .font(appearance.fonts.body)
                     .foregroundStyle(appearance.colors.tertiaryText)
+                Text("8:32 hours")
+                    .font(appearance.fonts.body)
+                    .foregroundStyle(appearance.colors.tertiaryText)
+                HStack{
+                    Text("Mo")
+                        .foregroundStyle(appearance.colors.primaryText)
+                    Text("Tu")
+                        .foregroundStyle(appearance.colors.tertiaryText)
+                    Text("We")
+                        .foregroundStyle(appearance.colors.tertiaryText)
+                    Text("Th")
+                        .foregroundStyle(appearance.colors.tertiaryText)
+                    Text("Fr")
+                        .foregroundStyle(appearance.colors.tertiaryText)
+                    Text("Sa")
+                        .foregroundStyle(appearance.colors.primaryText)
+                    Text("Su")
+                        .foregroundStyle(appearance.colors.primaryText)
+                }
             }
             Spacer()
             Toggle("", isOn: Binding(

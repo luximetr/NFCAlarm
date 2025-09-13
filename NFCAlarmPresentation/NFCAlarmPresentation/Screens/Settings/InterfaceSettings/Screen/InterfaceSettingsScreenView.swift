@@ -51,15 +51,6 @@ struct InterfaceSettingsScreenView: View {
         }
     }
     
-    @ToolbarContentBuilder
-    private func navigationTitle() -> some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            Text(viewModel.localizer.localizeText("navigationTitle"))
-                .foregroundStyle(appearance.colors.primaryText)
-                .font(appearance.fonts.headline)
-        }
-    }
-    
     @ViewBuilder
     func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         Section(content: content, header: {

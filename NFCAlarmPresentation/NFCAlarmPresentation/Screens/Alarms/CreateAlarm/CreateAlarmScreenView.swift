@@ -31,129 +31,86 @@ struct CreateAlarmScreenView: View {
             Button(viewModel.localizer.localizeText("continueButtonTitle")) {
                 viewModel.saveAlarmTapped()
             }
-            CircularMinutePicker()
-            
-            RotatingMinuteDial()
+            SleepPicker()
+                .frame(width: 300, height: 300)
         }
         .background(appearance.colors.primaryBackground)
         .titleBackNavigationBar(title: viewModel.localizer.localizeText("navigationTitle")) {
             viewModel.backButtonTapped()
         }
     }
+}
+
+struct SleepPicker: View {
+    @State private var startAngle: Angle = .degrees(0)    // midnight
+    @State private var endAngle: Angle = .degrees(90)     // 3 am
     
-    @ToolbarContentBuilder
-    private func navigationTitle() -> some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            Text(viewModel.localizer.localizeText("navigationTitle"))
-                .foregroundStyle(appearance.colors.primaryText)
-                .font(appearance.fonts.headline)
+    var body: some View {
+        GeometryReader { geo in
+            let size = min(geo.size.width, geo.size.height)
+            let radius = size / 2
+            
+            ZStack {
+                // Base circle
+                Circle()
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 20)
+                
+                // Selected arc
+                Circle()
+                    .trim(from: startTrim, to: endTrim)
+                    .stroke(Color.blue, lineWidth: 20)
+                    .rotationEffect(.degrees(-90))
+                
+                // Start handle
+                handle(at: startAngle, radius: radius)
+                    .gesture(dragGesture(for: .start, radius: radius))
+                
+                // End handle
+                handle(at: endAngle, radius: radius)
+                    .gesture(dragGesture(for: .end, radius: radius))
+            }
+            .frame(width: size, height: size)
         }
     }
-}
-
-struct CircularMinutePicker: View {
-    @State private var selectedMinute: Int = 0
-    @State private var selectedHour: Int = 12
-
-    let radius: CGFloat = 150
-
-    var body: some View {
-        ZStack {
-            // Dial ticks
-            ForEach(0..<60) { minute in
-                let angle = Angle.degrees(Double(minute) * 6) // 360 / 60
-                VStack {
-                    Text(String(format: "%02d", minute))
-                        .font(.caption)
-                        .foregroundColor(minute == selectedMinute ? .white : .gray)
-                        .rotationEffect(-angle) // keep upright
-                    Spacer()
-                }
-                .rotationEffect(angle)
-            }
-            .frame(width: radius * 2, height: radius * 2)
-
-            // Center (Hour + Selected minute)
-            HStack {
-                Text("\(selectedHour)")
-                    .font(.largeTitle)
-                Text(String(format: "%02d", selectedMinute))
-                    .font(.largeTitle)
-            }
-            .foregroundColor(.white)
-        }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    let dx = value.location.x - radius
-                    let dy = value.location.y - radius
-                    let angle = atan2(dy, dx) * 180 / .pi
-                    let normalized = (angle < 0 ? angle + 360 : angle)
-                    selectedMinute = Int(normalized / 6) % 60
-                }
-        )
-        .frame(width: radius * 2, height: radius * 2)
-        .background(Color.black.opacity(0.8))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+    
+    // Convert angle to trim value (0...1)
+    private var startTrim: CGFloat {
+        CGFloat(startAngle.degrees / 360)
     }
-}
-
-struct RotatingMinuteDial: View {
-    @State private var rotation: Double = 0.0
-    @State private var selectedMinute: Int = 0
-    @State private var selectedHour: Int = 12
-
-    let radius: CGFloat = 150
-
-    var body: some View {
-        ZStack {
-            // Circle of minutes
-            Circle()
-                .stroke(Color.gray.opacity(0.3), lineWidth: 2)
-                .frame(width: radius * 2, height: radius * 2)
-                .overlay(
-                    ZStack {
-                        ForEach(0..<60) { minute in
-                            let angle = Angle.degrees(Double(minute) * 6)
-                            VStack {
-                                Text(String(format: "%02d", minute))
-                                    .font(.caption)
-                                    .foregroundColor(minute == selectedMinute ? .white : .gray)
-                                    .rotationEffect(-angle) // keep upright
-                                Spacer()
-                            }
-                            .rotationEffect(angle)
-                        }
-                    }
-                    .frame(width: radius * 2, height: radius * 2)
-                    .rotationEffect(.degrees(rotation)) // whole dial rotates
-                )
-
-            // Fixed "selection window" in center
-            VStack {
-                Text("\(selectedHour)")
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                Text(String(format: "%02d", selectedMinute))
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-            }
-        }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    let dx = value.location.x - radius
-                    let dy = value.location.y - radius
-                    let angle = atan2(dy, dx) * 180 / .pi
-                    rotation = -angle // rotate dial
-                    // Map rotation to minute
-                    let normalized = (angle < 0 ? angle + 360 : angle)
-                    selectedMinute = (Int(normalized / 6) + 15) % 60
+    private var endTrim: CGFloat {
+        CGFloat(endAngle.degrees / 360)
+    }
+    
+    // Handle circle
+    private func handle(at angle: Angle, radius: CGFloat) -> some View {
+        let x = cos(angle.radians - .pi/2) * radius
+        let y = sin(angle.radians - .pi/2) * radius
+        
+        return Circle()
+            .fill(Color.blue)
+            .frame(width: 30, height: 30)
+            .offset(x: x, y: y)
+    }
+    
+    // Drag gesture
+    private func dragGesture(for type: HandleType, radius: CGFloat) -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                let vector = CGVector(dx: value.location.x - radius,
+                                      dy: value.location.y - radius)
+                let angle = atan2(vector.dy, vector.dx) + .pi/2
+                let degrees = (angle * 180 / .pi).truncatingRemainder(dividingBy: 360)
+                
+                if type == .start {
+                    startAngle = .degrees(degrees < 0 ? degrees + 360 : degrees)
+                } else {
+                    endAngle = .degrees(degrees < 0 ? degrees + 360 : degrees)
                 }
-        )
-        .frame(width: radius * 2, height: radius * 2)
-        .background(Color.black.opacity(0.8))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
+    }
+    
+    enum HandleType {
+        case start, end
     }
 }
 

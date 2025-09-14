@@ -31,8 +31,13 @@ struct CreateAlarmScreenView: View {
             Button(viewModel.localizer.localizeText("continueButtonTitle")) {
                 viewModel.saveAlarmTapped()
             }
-            SleepPicker()
+            MinutePickerView()
                 .frame(width: 300, height: 300)
+            
+            CircularStack(count: 24, radius: 120) { i, _ in
+                Text(String(format: "%02d", i))
+                    .font(.headline)
+            }
         }
         .background(appearance.colors.primaryBackground)
         .titleBackNavigationBar(title: viewModel.localizer.localizeText("navigationTitle")) {
@@ -41,76 +46,29 @@ struct CreateAlarmScreenView: View {
     }
 }
 
-struct SleepPicker: View {
-    @State private var startAngle: Angle = .degrees(0)    // midnight
-    @State private var endAngle: Angle = .degrees(90)     // 3 am
+struct CircularPicker: View {
+    @State private var rotation: Angle = .zero
+    
+    let values = Array(0..<60)
     
     var body: some View {
-        GeometryReader { geo in
-            let size = min(geo.size.width, geo.size.height)
-            let radius = size / 2
-            
-            ZStack {
-                // Base circle
-                Circle()
-                    .stroke(Color.gray.opacity(0.3), lineWidth: 20)
-                
-                // Selected arc
-                Circle()
-                    .trim(from: startTrim, to: endTrim)
-                    .stroke(Color.blue, lineWidth: 20)
-                    .rotationEffect(.degrees(-90))
-                
-                // Start handle
-                handle(at: startAngle, radius: radius)
-                    .gesture(dragGesture(for: .start, radius: radius))
-                
-                // End handle
-                handle(at: endAngle, radius: radius)
-                    .gesture(dragGesture(for: .end, radius: radius))
+        ZStack {
+            // Circle with numbers
+            ForEach(values, id: \.self) { i in
+                Text("\(i)")
+                    .font(.caption)
+                    .rotationEffect(.degrees(Double(i) / 60.0 * 360))
+                    .offset(y: -120) // radius
+                    .rotationEffect(-rotation) // keep upright when rotating
             }
-            .frame(width: size, height: size)
         }
-    }
-    
-    // Convert angle to trim value (0...1)
-    private var startTrim: CGFloat {
-        CGFloat(startAngle.degrees / 360)
-    }
-    private var endTrim: CGFloat {
-        CGFloat(endAngle.degrees / 360)
-    }
-    
-    // Handle circle
-    private func handle(at angle: Angle, radius: CGFloat) -> some View {
-        let x = cos(angle.radians - .pi/2) * radius
-        let y = sin(angle.radians - .pi/2) * radius
-        
-        return Circle()
-            .fill(Color.blue)
-            .frame(width: 30, height: 30)
-            .offset(x: x, y: y)
-    }
-    
-    // Drag gesture
-    private func dragGesture(for type: HandleType, radius: CGFloat) -> some Gesture {
-        DragGesture()
-            .onChanged { value in
-                let vector = CGVector(dx: value.location.x - radius,
-                                      dy: value.location.y - radius)
-                let angle = atan2(vector.dy, vector.dx) + .pi/2
-                let degrees = (angle * 180 / .pi).truncatingRemainder(dividingBy: 360)
-                
-                if type == .start {
-                    startAngle = .degrees(degrees < 0 ? degrees + 360 : degrees)
-                } else {
-                    endAngle = .degrees(degrees < 0 ? degrees + 360 : degrees)
+        .rotationEffect(rotation) // rotate the whole circle
+        .gesture(
+            RotationGesture()
+                .onChanged { value in
+                    rotation = value
                 }
-            }
-    }
-    
-    enum HandleType {
-        case start, end
+        )
     }
 }
 

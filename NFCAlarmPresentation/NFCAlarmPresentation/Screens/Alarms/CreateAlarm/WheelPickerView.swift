@@ -249,10 +249,10 @@ struct CircularLayout: Layout {
     }
 }
 
-struct CircularStack<Content: View>: View {
-    let count: Int
+struct CircularStack: View {
+    var range: ClosedRange<Int>
+    private var count: Int { range.upperBound - range.lowerBound + 1 }
     let radius: CGFloat
-    let content: (Int, Bool) -> Content   // pass `isSelected`
     
     @GestureState private var gestureState: CGFloat = 0
     @State private var rotation: Angle = .zero
@@ -262,18 +262,17 @@ struct CircularStack<Content: View>: View {
     
     @State private var selectedIndex: Int = 0
     
-    let deceleration: Double = 400
-    
     var body: some View {
         ZStack {
-            ForEach(0..<count, id: \.self) { index in
+            ForEach(range, id: \.self) { index in
                 let baseAngle = Double(index) / Double(count) * 360
                 let totalAngle = baseAngle + rotation.degrees
                 let normalized = (totalAngle.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
                 
                 let isSelected = abs(normalized - 0) < (360 / Double(count)) / 2 // nearest to right side
                 
-                content(index, isSelected)
+                Text("\(index)")
+                    .font(.body)
                     .rotationEffect(.degrees(-90))
                     .offset(y: -radius)
                     .rotationEffect(.degrees(-baseAngle))
@@ -303,10 +302,6 @@ struct CircularStack<Content: View>: View {
                 .onEnded { value in
                     let vectorDx = value.predictedEndLocation.x + value.velocity.width - radius
                     let vectorDy = value.predictedEndLocation.y + value.velocity.height - radius
-//                    let vector = CGVector(
-//                        dx: value.predictedEndLocation.x - radius,
-//                        dy: value.predictedEndLocation.y - radius
-//                    )
                     let vector = CGVector(dx: vectorDx, dy: vectorDy)
                     let angle = atan2(vector.dy, vector.dx)
                     
@@ -332,7 +327,7 @@ struct CircularStack<Content: View>: View {
         var closestIndex = 0
         var minDistance = Double.greatestFiniteMagnitude
         
-        for i in 0..<count {
+        for i in range {
             let baseAngle = Double(i) / Double(count) * 360
             let totalAngle = baseAngle + rotation.degrees
             let normalized = (totalAngle.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
@@ -400,24 +395,12 @@ class DisplayLinkProxy {
 
 #Preview {
     @Previewable @State var selectedValue: Int = 50
-    ScrollView {
-        VStack {
-            if #available(iOS 18, *) {
-                WheelPickerView(
-                    range: 5...100,
-                    selectedValue: $selectedValue) { currentValue in
-                        Text("\(currentValue)")
-                    }
-            } else {
-                // Fallback on earlier versions
-            }
-            MinutePickerView()
-                .frame(height: 200)
-            
-            CircularStack(count: 24, radius: 100) { i, selectedValue  in
-                Text(String(format: "-%02d", i))
-                    .font(.headline)
-            }
+    GeometryReader { geometry in
+        ZStack {
+            CircularStack(range: 1...60, radius: 180)
+            CircularStack(range: 1...12, radius: 90)
         }
+        .position(x: 0, y: geometry.size.height / 2)
     }
+    
 }

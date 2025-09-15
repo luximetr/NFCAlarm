@@ -34,10 +34,10 @@ struct CreateAlarmScreenView: View {
             MinutePickerView()
                 .frame(width: 300, height: 300)
             
-            CircularStack(count: 24, radius: 120) { i, _ in
-                Text(String(format: "%02d", i))
-                    .font(.headline)
-            }
+//            CircularStack(count: 24, radius: 120) { i, _ in
+//                Text(String(format: "%02d", i))
+//                    .font(.headline)
+//            }
         }
         .background(appearance.colors.primaryBackground)
         .titleBackNavigationBar(title: viewModel.localizer.localizeText("navigationTitle")) {

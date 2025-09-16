@@ -2,7 +2,7 @@ import Foundation
 
 extension Bundle {
     
-    class func forLocale(_ locale: Locale) -> Bundle? {
+    @MainActor class func forLocale(_ locale: Locale) -> Bundle? {
         let language = locale.language
         let languageCode: String
         switch language {
@@ -13,7 +13,7 @@ extension Bundle {
         return bundle
     }
     
-    private class func localizedFor(language: String, region: String?) -> Bundle? {
+    @MainActor private class func localizedFor(language: String, region: String?) -> Bundle? {
         var resource = language
         if let region = region {
             resource += "_\(region)"
@@ -37,5 +37,5 @@ extension Bundle {
 }
 
 private actor BundlesStore {
-    static var localizedBundles: [String: Bundle] = [:]
+    @MainActor static var localizedBundles: [String: Bundle] = [:]
 }
